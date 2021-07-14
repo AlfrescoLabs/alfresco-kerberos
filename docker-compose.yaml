@@ -2,7 +2,8 @@ version: '3.5'
 
 services:
   openldap:
-    image: nugaon/kerberos-with-ldap
+    build: ./openldap
+    image: openldap-kerberos
     ports:
       # LDAP
       - 389:389
@@ -12,12 +13,18 @@ services:
       # Kerberos v5
       - 88:88
       - 88:88/udp
+    env_file:
+      - openldap.env
     container_name: openldap
     # `--copy-service` prevents ldif files from being overwritten after subsitution. Add ` --loglevel debug` for debug
     # command: --copy-service --loglevel debug
     volumes:
+      - ./openldap/krb5.conf:/etc/krb5.conf
+      - ./openldap/krb5kdc:/etc/krb5kdc
+      # - ./openldap/service/z_krb5kdc/process.sh:/container/service/z_krb5kdc/process.sh
       - vol-openldap-ldap:/var/lib/ldap
       - vol-openldap-slapd:/etc/ldap/slapd.d
+      # For sharing keytab files to alfresco
       - ./keytabs:/etc/keytabs
     networks:
       alfresco-network:
