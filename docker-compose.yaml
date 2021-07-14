@@ -12,8 +12,6 @@ services:
       # Kerberos v5
       - 88:88
       - 88:88/udp
-    env_file:
-      - openldap.env
     container_name: openldap
     # `--copy-service` prevents ldif files from being overwritten after subsitution. Add ` --loglevel debug` for debug
     # command: --copy-service --loglevel debug
