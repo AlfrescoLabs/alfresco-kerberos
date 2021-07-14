@@ -15,6 +15,8 @@ RUN LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-reco
     && sed -i "s/# Required-Start.*/& slapd/" /etc/init.d/krb5-kdc \
     && sed -i "s/# Required-Stop.*/& slapd/" /etc/init.d/krb5-kdc
 
+RUN insserv /etc/init.d/krb5-kdc && insserv /etc/init.d/krb5-admin-server
+
 # Add Kerberos schema (alternatively ldapadd -Y EXTERNAL -H ldapi:/// -f /tmp/kerberos.openldap.ldif)
 # ADD bootstrap/schema/kerberos.ldif /container/service/slapd/assets/config/bootstrap/kerberos.ldif
 ADD bootstrap/schema/kerberos.schema /container/service/slapd/assets/config/bootstrap/kerberos.schema
