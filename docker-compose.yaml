@@ -10,6 +10,8 @@ services:
       - 60464:60464 # changePasswordServer
       - 8080:8080 # http
       - 8443:8443 # https
+    volumes:
+    - ./apache-directory/config.ldif:/bootstrap/conf/config.ldif:ro
     networks:
       alfresco-network:
 
@@ -58,7 +60,7 @@ services:
 
                 -Dldap.authentication.allowGuestLogin=false
                 -Dldap.authentication.userNameFormat=%s@example.com
-                -Dldap.authentication.java.naming.provider.url=ldap://ldap:389
+                -Dldap.authentication.java.naming.provider.url=ldap://ldap:10389
                 -Dldap.authentication.defaultAdministratorUserNames=joe.bloggs,vagrant
                 -Dldap.authentication.active=false
 
