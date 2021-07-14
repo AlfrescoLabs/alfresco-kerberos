@@ -1,3 +1,5 @@
+.idea
+
 # KDC database password stash
 openldap/krb5kdc/.k5.*
 # LDAP password stash
