@@ -199,16 +199,16 @@ services:
       networks:
         alfresco-network:
 
-#  proxy:
-#      image: alfresco/alfresco-acs-nginx:3.0.1
-#      depends_on:
-#        - alfresco
-#        - digital-workspace
-#      ports:
-#        - 8080:8080
-#      links:
-#        - digital-workspace
-#        - alfresco
+  proxy:
+      image: alfresco/alfresco-acs-nginx:3.0.1
+      depends_on:
+        - alfresco
+        - digital-workspace
+      ports:
+        - 8080:8080
+      links:
+        - digital-workspace
+        - alfresco
 
 networks:
   alfresco-network:
