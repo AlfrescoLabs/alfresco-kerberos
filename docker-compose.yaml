@@ -4,14 +4,12 @@ services:
   ldap:
     image: openmicroscopy/apacheds
     ports:
-      # LDAP
-      - 389:389
-      - 636:636
-      # kadmin server
-      - 749:749
-      # Kerberos v5
-      - 88:88
-      - 88:88/udp
+      - 10389:10389 # ldap
+      - 10636:10636 # ldaps
+      - 60088:60088 #  kerberos
+      - 60464:60464 # changePasswordServer
+      - 8080:8080 # http
+      - 8443:8443 # https
     networks:
       alfresco-network:
 
