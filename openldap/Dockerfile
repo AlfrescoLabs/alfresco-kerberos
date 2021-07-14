@@ -9,10 +9,11 @@ RUN apt-get -y update \
        krb5-admin-server \
        runit \
     && apt-get clean \
-    && sudo apt-get install -y sed \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN sed -i "s/# Required-Start.*/& slapd/" /etc/init.d/krb5-kdc && sed -i "s/# Required-Stop.*/& slapd/" /etc/init.d/krb5-kdc
+RUN LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends sed \
+    && sed -i "s/# Required-Start.*/& slapd/" /etc/init.d/krb5-kdc \
+    && sed -i "s/# Required-Stop.*/& slapd/" /etc/init.d/krb5-kdc
 
 # Add Kerberos schema (alternatively ldapadd -Y EXTERNAL -H ldapi:/// -f /tmp/kerberos.openldap.ldif)
 # ADD bootstrap/schema/kerberos.ldif /container/service/slapd/assets/config/bootstrap/kerberos.ldif
