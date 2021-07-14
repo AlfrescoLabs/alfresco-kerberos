@@ -1,9 +1,8 @@
 version: '3.5'
 
 services:
-
-  openldap:
-    image: nugaon/kerberos-with-ldap
+  ldap:
+    image: openmicroscopy/apacheds apacheds-docker
     ports:
       # LDAP
       - 389:389
@@ -13,18 +12,6 @@ services:
       # Kerberos v5
       - 88:88
       - 88:88/udp
-#    env_file:
-#      - openldap.env
-    container_name: openldap
-    tty: true
-    stdin_open: true
-#    command: --copy-service
-    volumes:
-#      - ./openldap/ldpa-init.ldif:/container/service/slapd/assets/config/bootstrap/ldif/50-bootstrap.ldif
-      - vol-openldap-ldap:/var/lib/ldap
-      - vol-openldap-slapd:/etc/ldap/slapd.d
-      # For sharing keytab files to alfresco
-#      - ./keytabs:/etc/keytabs
     networks:
       alfresco-network:
 
@@ -74,7 +61,7 @@ services:
 
                 -Dldap.authentication.allowGuestLogin=false
                 -Dldap.authentication.userNameFormat=%s@example.com
-                -Dldap.authentication.java.naming.provider.url=ldap://openldap:389
+                -Dldap.authentication.java.naming.provider.url=ldap://ldap:389
                 -Dldap.authentication.defaultAdministratorUserNames=joe.bloggs,vagrant
                 -Dldap.authentication.active=false
 
