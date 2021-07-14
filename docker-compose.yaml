@@ -86,9 +86,9 @@ services:
           # For sharing keytab files from Kerberos
           - ./keytabs:/etc
       depends_on:
-        - openldap
+        - ldap
       links:
-        - openldap
+        - ldap
       restart: on-failure # will restart until it's success
       networks:
         alfresco-network:
