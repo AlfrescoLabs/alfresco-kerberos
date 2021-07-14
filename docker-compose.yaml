@@ -2,26 +2,8 @@ version: '3.5'
 
 services:
 
-#  kerberos:
-#    image: phihos/sssd-krb5-ldap
-#    ports:
-#      # kadmin server
-#      - 749:749
-#      # Kerberos v5
-#      - 88:88
-#      - 88:88/udp
-#    environment:
-#      KERBEROS_REALM: "YOURDOMAIN.TLD"
-#      LDAP_BASE_DN: "DC=YOURDOMAIN,DC=TLD"
-#      LDAP_BIND_DN: "CN=SOMEACCOUNT,DC=YOURDOMAIN,DC=TLD"
-#      LDAP_BIND_PASSWORD: "SOMEPASSWORD"
-#      LDAP_URI: "ldap://openldap:389"
-#    networks:
-#      alfresco-network:
-
   openldap:
-    build: ./openldap
-    image: openldap-kerberos
+    image: nugaon/kerberos-with-ldap
     ports:
       # LDAP
       - 389:389
@@ -31,18 +13,18 @@ services:
       # Kerberos v5
       - 88:88
       - 88:88/udp
-    env_file:
-      - openldap.env
+#    env_file:
+#      - openldap.env
     container_name: openldap
-    command: --copy-service --loglevel debug
+    tty: true
+    stdin_open: true
+#    command: --copy-service
     volumes:
-      - ./openldap/krb5.conf:/etc/krb5.conf
-      - ./openldap/krb5kdc:/etc/krb5kdc
-      # - ./openldap/service/z_krb5kdc/process.sh:/container/service/z_krb5kdc/process.sh
+#      - ./openldap/ldpa-init.ldif:/container/service/slapd/assets/config/bootstrap/ldif/50-bootstrap.ldif
       - vol-openldap-ldap:/var/lib/ldap
       - vol-openldap-slapd:/etc/ldap/slapd.d
       # For sharing keytab files to alfresco
-      - ./keytabs:/etc/keytabs
+#      - ./keytabs:/etc/keytabs
     networks:
       alfresco-network:
 
