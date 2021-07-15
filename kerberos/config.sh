@@ -113,9 +113,9 @@ if [ ! -f /kerberos_initialized ]; then
 
   init_ldap
   create_config
-  create_admin_user
-  create_db
-  start_kdc
+#  create_admin_user
+#  create_db
+#  start_kdc
 
 #  touch /kerberos_initialized
 else
