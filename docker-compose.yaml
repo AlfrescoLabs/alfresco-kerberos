@@ -20,7 +20,7 @@ services:
         ipv4_address: 192.168.55.5
 
   kerberos:
-    image: nugaon/kerberos-with-ldap
+    build: ./kerberos
     container_name: kerberos
     environment:
       LDAP_URL: "ldap://openldap:389"

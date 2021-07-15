@@ -1,5 +1,12 @@
 # Alfresco Kerberos Test
 
+### LDAP Details
+
+* BaseDn: `cn=admin,dc=example,dc=com`
+
+* Password: `admin`
+
+
 ## QuickStart
 
 ### Kerberos Setup
@@ -22,11 +29,6 @@ docker exec --user root keycloak chmod 644 /tmp/keytabs/keycloak.keytab
 
 ### Accessing Keycloak
 
-* URL: http://keycloak.127.0.0.1.nip.io:8080
-
-* Username: `admin`
-
-* Password: `password`
 
 * OIDC Endpoint: `http://keycloak.127.0.0.1.nip.io:8080/auth/realms/{realm}/.well-known/openid-configuration`
 
