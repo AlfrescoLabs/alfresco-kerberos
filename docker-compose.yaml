@@ -1,7 +1,7 @@
 version: '3.5'
 
 services:
-  ldap:
+  apacheds:
     image: openmicroscopy/apacheds
     ports:
       - 10389:10389 # ldap
@@ -18,7 +18,7 @@ services:
       LDAP_DC: "ou=users,dc=example,dc=com"
       LDAP_USER: "uid=admin,ou=system"
       LDAP_PASS: "secret"
-      LDAP_URL: "ldap://ldap:10389"
+      LDAP_URL: "ldap://apacheds:10389"
     ports:
     - 88:88
     - 464:464
