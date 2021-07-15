@@ -208,7 +208,7 @@ services:
         - digital-workspace
         - alfresco
 
-networks:
+#networks:
 #  alfresco-network:
 #    driver: bridge
 #    ipam:
