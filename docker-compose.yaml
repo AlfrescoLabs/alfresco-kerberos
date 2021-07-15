@@ -23,8 +23,8 @@ services:
     - 88:88
     - 464:464
     - 749:749
-    depends_on:
-      - ldap
+#    depends_on:
+#      - ldap
 #    restart: on-failure # will restart until it's success
 #    networks:
 #        alfresco-network:
