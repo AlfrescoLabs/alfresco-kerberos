@@ -18,7 +18,7 @@ services:
       LDAP_DC: "ou=users,dc=example,dc=com"
       LDAP_USER: "uid=admin,ou=system"
       LDAP_PASS: "secret"
-      LDAP_URL: "ldap://ldap:10389"
+      LDAP_URL: "ldap://3.129.248.199:10389"
     ports:
     - 88:88
     - 464:464
