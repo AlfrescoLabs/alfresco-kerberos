@@ -77,7 +77,7 @@ create_db() {
 }
 
 init_ldap() {
-  kdb5_ldap_util -D $LDAP_USER create -subtrees $LDAP_DC -r $REALM -s -H $LDAP_URL <<EOF
+  kdb5_ldap_util -D $LDAP_USER create -s -H $LDAP_URL <<EOF
 $LDAP_PASS
 $KERB_ADMIN_PASS
 $KERB_ADMIN_PASS
