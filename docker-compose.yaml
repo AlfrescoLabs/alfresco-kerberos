@@ -16,7 +16,7 @@ services:
     container_name: openldap
     environment:
       LDAP_DC: "ou=users,dc=example,dc=com"
-      LDAP_USER: "admin"
+      LDAP_USER: "uid=admin,ou=system"
       LDAP_PASS: "secret"
       LDAP_URL: "ldap://ldap:10389"
     ports:
