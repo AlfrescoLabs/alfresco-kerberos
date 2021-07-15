@@ -5,6 +5,7 @@ services:
     image: openmicroscopy/apacheds
     ports:
       - 10389:10389 # ldap
+      - 10636:10636 # ldaps
     volumes:
     - ./apache-directory/config.ldif:/bootstrap/conf/config.ldif:ro
     networks:
