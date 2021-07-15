@@ -6,17 +6,26 @@ services:
     ports:
       - 10389:10389 # ldap
       - 10636:10636 # ldaps
-      - 60088:60088 #  kerberos
-      - 60464:60464 # changePasswordServer
-      - 8080:8080 # http
-      - 8443:8443 # https
-    extra_hosts:
-      - "example.net:127.0.0.1"
-      - "example.in:127.0.0.1"
     volumes:
     - ./apache-directory/config.ldif:/bootstrap/conf/config.ldif:ro
     networks:
       alfresco-network:
+
+  kerberos:
+    image: nugaon/kerberos-with-ldap
+    container_name: openldap
+    environment:
+      LDAP_DC: "ou=users,dc=example,dc=com"
+      LDAP_USER: "admin"
+      LDAP_PASS: "secret"
+      LDAP_URL: "ldap://ldap:10389"
+    ports:
+    - 88:88
+    - 464:464
+    - 749:749
+    networks:
+        alfresco-network:
+
 
   alfresco:
       # image: alfresco/alfresco-content-repository:6.2.2
@@ -64,16 +73,16 @@ services:
                 -Dldap.authentication.allowGuestLogin=false
                 -Dldap.authentication.userNameFormat=%s@example.com
                 -Dldap.authentication.java.naming.provider.url=ldap://ldap:10389
-                -Dldap.authentication.defaultAdministratorUserNames=joe.bloggs,vagrant
+                -Dldap.authentication.defaultAdministratorUserNames=admin
                 -Dldap.authentication.active=false
 
                 -Dsynchronization.autoCreatePeopleOnLogin=false
                 -Dldap.synchronization.active=true
 
                 -Dldap.synchronization.java.naming.security.principal=alfresco.ldap@example.com
-                -Dldap.synchronization.java.naming.security.credentials=C0mplexPassword
-                -Dldap.synchronization.groupSearchBase=OU=Alfresco-Groups,DC=example,DC=org
-                -Dldap.synchronization.userSearchBase=OU=Alfresco-Users,DC=example,DC=org
+                -Dldap.synchronization.java.naming.security.credentials=secret
+                -Dldap.synchronization.groupSearchBase=OU=Groups,DC=example,DC=com
+                -Dldap.synchronization.userSearchBase=OU=Users,DC=example,DC=com
 
                 -Dkerberos.authentication.realm=EXAMPLE.COM
                 -Dkerberos.authentication.user.configEntryName=Alfresco
