@@ -25,7 +25,7 @@ services:
     - 749:749
     depends_on:
       - ldap
-    restart: on-failure # will restart until it's success
+#    restart: on-failure # will restart until it's success
 #    networks:
 #        alfresco-network:
 
