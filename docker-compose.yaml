@@ -10,9 +10,9 @@ services:
     env_file:
       - openldap.env
     container_name: openldap
-    # `--copy-service` prevents ldif files from being overwritten after subsitution. Add ` --loglevel debug` for debug
-    # command: --copy-service --loglevel debug
+    command: --copy-service --loglevel debug
     volumes:
+      - ./openldap/ldap-init.ldif:/container/service/slapd/assets/config/bootstrap/ldif/50-bootstrap.ldif
       - vol-openldap-ldap:/var/lib/ldap
       - vol-openldap-slapd:/etc/ldap/slapd.d
     networks:
@@ -23,8 +23,9 @@ services:
     image: nugaon/kerberos-with-ldap
     container_name: kerberos
     environment:
-      LDAP_USER: "admin"
       LDAP_URL: "ldap://openldap:389"
+    depends_on:
+      - openldap
     ports:
       - 88:88
       - 464:464
