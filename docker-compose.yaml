@@ -8,7 +8,7 @@ services:
       - 389:389
       - 636:636
     env_file:
-      - openldap.env
+      - ./openldap/openldap.env
     container_name: openldap
     command: --copy-service --loglevel debug
     volumes:

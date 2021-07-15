@@ -61,3 +61,13 @@ objectclass: top
 objectclass: groupOfNames
 cn: accountant
 member: uid=bob,ou=People,{{ LDAP_BASE_DN }}
+
+dn: uid=httpalfresco,ou=People,{{ LDAP_BASE_DN }}
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: httpalfresco
+sn: Http Alfreso
+uid: httpalfresco
+userPassword: password
