@@ -25,7 +25,7 @@ services:
     - 464:464
     - 749:749
     depends_on:
-      - ldap
+      - apacheds
     restart: on-failure # will restart until it's success
     networks:
       alfresco-network:
@@ -101,9 +101,9 @@ services:
           # For sharing keytab files from Kerberos
           - ./keytabs:/etc
       depends_on:
-        - ldap
+        - apacheds
       links:
-        - ldap
+        - apacheds
       restart: on-failure # will restart until it's success
       networks:
         alfresco-network:
