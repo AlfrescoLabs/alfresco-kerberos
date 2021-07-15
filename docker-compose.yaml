@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   openldap:
-    image: osixia/openldap
+    build: ./openldap
     ports:
       # LDAP
       - 389:389
@@ -12,7 +12,6 @@ services:
     container_name: openldap
     command: --copy-service --loglevel debug
     volumes:
-      - ./openldap/ldap-init.ldif:/container/service/slapd/assets/config/bootstrap/ldif/50-bootstrap.ldif
       - vol-openldap-ldap:/var/lib/ldap
       - vol-openldap-slapd:/etc/ldap/slapd.d
     networks:
