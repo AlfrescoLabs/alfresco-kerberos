@@ -7,11 +7,6 @@ services:
       # LDAP
       - 389:389
       - 636:636
-      # kadmin server
-      - 749:749
-      # Kerberos v5
-      - 88:88
-      - 88:88/udp
     env_file:
       - openldap.env
     container_name: openldap
@@ -20,10 +15,23 @@ services:
     volumes:
       - vol-openldap-ldap:/var/lib/ldap
       - vol-openldap-slapd:/etc/ldap/slapd.d
-      - ./keytabs:/etc/keytabs
     networks:
       alfresco-network:
         ipv4_address: 192.168.55.5
+
+  kerberos:
+    image: nugaon/kerberos-with-ldap
+    container_name: openldap
+    environment:
+      LDAP_DC: "ou=users,dc=example,dc=com"
+      LDAP_USER: "admin"
+      LDAP_URL: "ldap://openldap:389"
+    ports:
+      - 88:88
+      - 464:464
+      - 749:749
+    networks:
+      alfresco-network:
 
   alfresco:
       # image: alfresco/alfresco-content-repository:6.2.2
