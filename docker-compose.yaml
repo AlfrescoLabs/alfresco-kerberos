@@ -12,14 +12,13 @@ services:
 #      alfresco-network:
 
   kerberos:
-    image: nugaon/kerberos-with-ldap
+    build: ./kerberos
     container_name: kerberos
     environment:
-      LDAP_DC: "ou=system"
-      LDAP_USER: "uid=admin"
+      LDAP_DC: "ou=users,dc=example,dc=com"
+      LDAP_USER: "uid=admin,ou=system"
       LDAP_PASS: "secret"
       LDAP_URL: "ldap://ldap:10389"
-      SEARCH_DOMAINS: "ou=users,dc=example,dc=com"
     ports:
     - 88:88
     - 464:464
@@ -214,7 +213,7 @@ services:
 #    driver: bridge
 #    ipam:
 #      driver: default
-#      config:
+#      config.sh:
 #        - subnet: 192.168.55.0/24
 
 volumes:
