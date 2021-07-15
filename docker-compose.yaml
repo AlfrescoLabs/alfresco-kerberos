@@ -15,8 +15,8 @@ services:
     image: nugaon/kerberos-with-ldap
     container_name: kerberos
     environment:
-      LDAP_DC: ";"
-      LDAP_USER: "uid=admin,ou=system"
+      LDAP_DC: "ou=system"
+      LDAP_USER: "uid=admin"
       LDAP_PASS: "secret"
       LDAP_URL: "ldap://ldap:10389"
       SEARCH_DOMAINS: "ou=users,dc=example,dc=com"
