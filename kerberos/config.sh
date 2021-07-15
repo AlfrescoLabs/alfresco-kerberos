@@ -111,7 +111,7 @@ EOF
 if [ ! -f /kerberos_initialized ]; then
   mkdir -p /var/log/kerberos
 
-  create_db
+#  create_db
   init_ldap
   create_config
   create_admin_user
