@@ -83,7 +83,7 @@ $KERB_ADMIN_PASS
 $KERB_ADMIN_PASS
 EOF
 
-  kdb5_ldap_util -D cn=$LDAP_USER.,$LDAP_DC stashsrvpw -f /etc/krb5kdc/service.keyfile cn=$LDAP_USER,$LDAP_DC <<EOF
+  kdb5_ldap_util -D cn=$LDAP_USER,$LDAP_DC stashsrvpw -f /etc/krb5kdc/service.keyfile cn=$LDAP_USER,$LDAP_DC <<EOF
 $LDAP_PASS
 $LDAP_PASS
 $LDAP_PASS
@@ -101,7 +101,7 @@ restart_kdc() {
 }
 
 create_admin_user() {
-  kadmin.local -q "addprinc -x dn=cn=$KERB_ADMIN_USER,$LDAP_DC admin" <<EOF
+  kadmin.local -q "addprinc -x cn=$KERB_ADMIN_USER,$LDAP_DC admin" <<EOF
 $LDAP_PASS
 $LDAP_PASS
 EOF
