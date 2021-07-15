@@ -1,4 +1,7 @@
 ## start env
+// todo remove this
+docker system prune -a --volumes -f
+
 docker-compose up -d;
 sleep 60;
 
