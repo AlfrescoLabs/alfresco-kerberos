@@ -19,6 +19,7 @@ services:
       LDAP_USER: "uid=admin,ou=system"
       LDAP_PASS: "secret"
       LDAP_URL: "ldap://ldap:10389"
+      SEARCH_DOMAINS: ""
     ports:
     - 88:88
     - 464:464
