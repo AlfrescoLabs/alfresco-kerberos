@@ -1,0 +1,12 @@
+dn: olcDatabase={1}{{ LDAP_BACKEND }},cn=config
+changetype: modify
+delete: olcAccess
+-
+add: olcAccess
+olcAccess: to * by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth manage by * break
+olcAccess: to * by self read by * write by * none
+olcAccess: to attrs=userPassword by self write by anonymous auth by * none
+olcAccess: to attrs=shadowLastChange by self write by * read
+olcAccess: to attrs=krbPrincipalKey by anonymous auth by dn.exact="uid=kdc-service,{{ LDAP_BASE_DN }}" read by dn.exact="uid=kadmin-service,{{ LDAP_BASE_DN }}" write by self write by * none
+olcAccess: to dn.subtree="cn=krbContainer,{{ LDAP_BASE_DN }}" by dn.exact="uid=kdc-service,{{ LDAP_BASE_DN }}" read by dn.exact="uid=kadmin-service,{{ LDAP_BASE_DN }}" write by * none
+olcAccess: to * by * read

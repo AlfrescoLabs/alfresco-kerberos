@@ -12,6 +12,9 @@ services:
     container_name: openldap
     command: --copy-service --loglevel debug
     volumes:
+      - ./openldap/00-kerberos.ldif:/container/service/slapd/assets/config/bootstrap/ldif/00-kerberos.ldif
+      - ./openldap/02-security.ldif:/container/service/slapd/assets/config/bootstrap/ldif/02-security.ldif
+      - ./openldap/05-index.ldif:/container/service/slapd/assets/config/bootstrap/ldif/05-index.ldif
       - ./openldap/ldap-init.ldif:/container/service/slapd/assets/config/bootstrap/ldif/50-bootstrap.ldif
       - vol-openldap-ldap:/var/lib/ldap
       - vol-openldap-slapd:/etc/ldap/slapd.d

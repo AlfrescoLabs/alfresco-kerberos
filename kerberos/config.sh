@@ -52,7 +52,7 @@ create_config() {
  $DOMAIN_REALM = $REALM
 
 [dbdefaults]
-  ldap_kerberos_container_dn = $LDAP_DC
+  ldap_kerberos_container_dn = cn=krbContainer,$LDAP_DC
 
 [dbmodules]
   openldap_ldapconf = {
