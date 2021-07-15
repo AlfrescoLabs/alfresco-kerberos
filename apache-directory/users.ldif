@@ -1,0 +1,59 @@
+version: 1
+
+dn: dc=security,dc=example,dc=com
+objectClass: top
+objectClass: domain
+dc: security
+
+dn: ou=services,dc=security,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: services
+
+dn: ou=users,dc=security,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: users
+
+dn: uid=hnelson,ou=users,dc=security,dc=example,dc=com
+objectClass: top
+objectClass: krb5KDCEntry
+objectClass: inetOrgPerson
+objectClass: krb5Principal
+objectClass: person
+objectClass: organizationalPerson
+cn: Horatio Nelson
+krb5KeyVersionNumber: 0
+krb5PrincipalName: hnelson@EXAMPLE.COM
+sn: Nelson
+krb5Key:: MBGgAwIBA6EKBAj0pxNkimHOWw==
+krb5Key:: MBmgAwIBEaESBBCtIUs4tp38yqzxXzRtQXuQ
+krb5Key:: MCGgAwIBEKEaBBhXB84pUpIsHIy/Q8I9j4xenoz3XT5KXiU=
+krb5Key:: MBmgAwIBF6ESBBCHjYAUYGzaKWd6RO+hNT/H
+uid: hnelson
+userPassword:: e1NTSEF9VnhjYUl4U3JxUnAraWh1dXo2NEhzN1EwbXE0ZHBBQTNsUHJXMGc9P
+ Q==
+
+dn: uid=ldap,ou=services,dc=security,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+objectClass: krb5KDCEntry
+objectClass: uidObject
+objectClass: krb5Principal
+krb5KeyVersionNumber: 0
+krb5PrincipalName: ldap/example.net@EXAMPLE.COM
+uid: ldap
+userPassword: randomKey
+ou: TGT
+
+dn: uid=krbtgt,ou=services,dc=security,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+objectClass: krb5KDCEntry
+objectClass: uidObject
+objectClass: krb5Principal
+krb5KeyVersionNumber: 0
+krb5PrincipalName: krbtgt/EXAMPLE.COM@EXAMPLE.COM
+uid: krbtgt
+userPassword:: randomkey
+ou: LDAP

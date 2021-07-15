@@ -10,6 +10,8 @@ services:
       - 60464:60464 # changePasswordServer
       - 8080:8080 # http
       - 8443:8443 # https
+    extra_hosts:
+      - "example.net:127.0.0.1"
     volumes:
     - ./apache-directory/config.ldif:/bootstrap/conf/config.ldif:ro
     networks:
