@@ -23,9 +23,10 @@ services:
     - 88:88
     - 464:464
     - 749:749
+    depends_on:
+      - ldap
     networks:
         alfresco-network:
-
 
   alfresco:
       # image: alfresco/alfresco-content-repository:6.2.2
