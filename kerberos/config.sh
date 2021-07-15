@@ -236,15 +236,13 @@ EOF
 if [ ! -f /kerberos_initialized ]; then
   mkdir -p /var/log/kerberos
 
-  log "create db";
   create_db
-
   create_config
   init_ldap
   create_admin_user
   start_kdc
 
-  touch /kerberos_initialized
+#  touch /kerberos_initialized
 else
   start_kdc
 fi
