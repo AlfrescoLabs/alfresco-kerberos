@@ -35,6 +35,7 @@ services:
       - 749:749
     networks:
       alfresco-network:
+        ipv4_address: 192.168.55.10
 
   alfresco:
       # image: alfresco/alfresco-content-repository:6.2.2
@@ -42,8 +43,8 @@ services:
       hostname: alfresco
       build:
         context: ./alfresco
-#      extra_hosts:
-#        - "dc01.example.com:192.168.100.25"
+      extra_hosts:
+        - "example.com:192.168.55.10"
 #        - "dc01:192.168.100.25"
       environment:
         JAVA_OPTS: "
@@ -113,7 +114,6 @@ services:
       restart: on-failure # will restart until it's success
       networks:
         alfresco-network:
-          ipv4_address: 192.168.55.10
 
   transform-router:
       image: quay.io/alfresco/alfresco-transform-router:1.3.2
