@@ -7,6 +7,5 @@ ldap-utils
 EXPOSE 88 464 749
 
 ADD ./config.sh /config.sh
-COPY ./config.sh /config.sh
 
 ENTRYPOINT ["/config.sh"]
