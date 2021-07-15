@@ -57,3 +57,29 @@ krb5PrincipalName: krbtgt/EXAMPLE.COM@EXAMPLE.COM
 uid: krbtgt
 userPassword:: randomkey
 ou: LDAP
+
+dn: ou=users,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: users
+
+dn: uid=hruser,ou=users,dc=example,dc=com
+objectClass: inetOrgPerson
+objectClass: krb5KDCEntry
+objectClass: krb5Principal
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: HR User
+krb5KeyVersionNumber: 1
+krb5PrincipalName: hruser@EXAMPLE.COM
+sn: hruser
+krb5Key:: MBGgAwIBA6EKBAj7IKhwvw1ivA==
+krb5Key:: MBmgAwIBEaESBBAyb3svF9XxYB1Hi8vt50EP
+krb5Key:: MBmgAwIBF6ESBBCIRvfq7o+xF60Gvdgwt1hs
+krb5Key:: MCGgAwIBEKEaBBjOGtmAB7DH3+XC5eqi36v44CDc39UlidY=
+krb5Key:: MCmgAwIBEqEiBCCwndH7kgddVOFV3jITWLhvj6pB2TUAjj32MvHtoDxzww==
+uid: hruser
+userPassword:: e1NTSEF9R2c2ZkJIdDdkb1dpRmtJRTVCWi9SajZrN1B0ak1uOG0xUm9kbnc9P
+ Q==
+
