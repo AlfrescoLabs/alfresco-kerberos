@@ -23,7 +23,7 @@ objectclass: inetOrgPerson
 uid: alice
 cn: Alice
 sn: Amber
-mail: alice@example.org
+mail: alice@example.com
 postalCode: 88441
 userPassword: password
 
@@ -35,7 +35,7 @@ objectclass: inetOrgPerson
 uid: bob
 cn: Bob
 sn: Brown
-mail: bob@example.org
+mail: bob@example.com
 postalCode: 88441
 postalCode: 77332
 postalCode: 66221
@@ -71,3 +71,4 @@ cn: httpalfresco
 sn: Http Alfreso
 uid: httpalfresco
 userPassword: password
+mail: httpalfresco@example.com
