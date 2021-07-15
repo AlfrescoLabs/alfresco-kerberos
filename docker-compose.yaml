@@ -8,8 +8,8 @@ services:
       - 10636:10636 # ldaps
     volumes:
     - ./apache-directory/config.ldif:/bootstrap/conf/config.ldif:ro
-    networks:
-      alfresco-network:
+#    networks:
+#      alfresco-network:
 
   kerberos:
     build: ./kerberos
@@ -26,9 +26,8 @@ services:
     depends_on:
       - apacheds
     restart: on-failure # will restart until it's success
-    networks:
-      alfresco-network:
-        ipv4_address: 192.168.55.5
+#    networks:
+#      alfresco-network:
 
   alfresco:
       # image: alfresco/alfresco-content-repository:6.2.2
@@ -104,9 +103,9 @@ services:
       links:
         - apacheds
       restart: on-failure # will restart until it's success
-      networks:
-        alfresco-network:
-          ipv4_address: 192.168.55.10
+#      networks:
+#        alfresco-network:
+#          ipv4_address: 192.168.55.10
 
   transform-router:
       image: quay.io/alfresco/alfresco-transform-router:1.3.2
@@ -121,8 +120,8 @@ services:
         - 8095:8095
       links:
         - activemq
-      networks:
-        alfresco-network:
+#      networks:
+#        alfresco-network:
 
   transform-core-aio:
       image: alfresco/alfresco-transform-core-aio:2.3.10
@@ -134,8 +133,8 @@ services:
         - 8090:8090
       links:
         - activemq
-      networks:
-        alfresco-network:
+#      networks:
+#        alfresco-network:
 
   shared-file-store:
       image: alfresco/alfresco-shared-file-store:0.13.0
@@ -147,8 +146,8 @@ services:
         - 8099:8099
       volumes:
         - shared-file-store-volume:/tmp/Alfresco/sfs
-      networks:
-        alfresco-network:
+#      networks:
+#        alfresco-network:
 
   postgres:
       image: postgres:11.7
@@ -159,8 +158,8 @@ services:
       command: postgres -c max_connections=300 -c log_min_messages=LOG
       ports:
         - 5432:5432
-      networks:
-        alfresco-network:
+#      networks:
+#        alfresco-network:
 
   solr6:
       image: alfresco/alfresco-search-services:2.0.1
@@ -178,8 +177,8 @@ services:
         - "SOLR_JAVA_MEM=-Xms2g -Xmx2g"
       ports:
         - 8083:8983 #Browser port
-      networks:
-        alfresco-network:
+#      networks:
+#        alfresco-network:
 
   activemq:
       image: alfresco/alfresco-activemq:5.16.1
@@ -188,15 +187,15 @@ services:
         - 5672:5672 # AMQP
         - 61616:61616 # OpenWire
         - 61613:61613 # STOMP
-      networks:
-        alfresco-network:
+#      networks:
+#        alfresco-network:
 
   digital-workspace:
       image: quay.io/alfresco/alfresco-digital-workspace:1.6.0
       environment:
         BASE_PATH: ./
-      networks:
-        alfresco-network:
+#      networks:
+#        alfresco-network:
 
   proxy:
       image: alfresco/alfresco-acs-nginx:3.0.1
@@ -210,12 +209,12 @@ services:
         - alfresco
 
 networks:
-  alfresco-network:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.55.0/24
+#  alfresco-network:
+#    driver: bridge
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: 192.168.55.0/24
 
 volumes:
   vol-openldap-ldap:
