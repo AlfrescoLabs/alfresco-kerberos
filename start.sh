@@ -2,8 +2,8 @@
 # todo remove this
 #docker system prune -a --volumes -f;
 
-docker-compose down -v;;
-sudo rm -rf ./keytabs && mkdir keytabs
+docker-compose down -v;
+rm -rf ./keytabs && mkdir keytabs;
 
 docker-compose build;
 docker-compose up -d;
