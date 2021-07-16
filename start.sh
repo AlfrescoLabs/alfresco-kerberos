@@ -3,6 +3,7 @@
 #docker system prune -a --volumes -f;
 
 docker-compose down -v;
+sleep 10;
 rm -rf ./keytabs && mkdir keytabs;
 
 docker-compose build;
