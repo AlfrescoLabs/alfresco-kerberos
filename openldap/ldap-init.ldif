@@ -23,7 +23,7 @@ objectclass: inetOrgPerson
 uid: alice
 cn: Alice
 sn: Amber
-mail: alice@example.org
+mail: alice@example.com
 postalCode: 88441
 userPassword: password
 
@@ -35,7 +35,7 @@ objectclass: inetOrgPerson
 uid: bob
 cn: Bob
 sn: Brown
-mail: bob@example.org
+mail: bob@example.com
 postalCode: 88441
 postalCode: 77332
 postalCode: 66221
@@ -61,3 +61,14 @@ objectclass: top
 objectclass: groupOfNames
 cn: accountant
 member: uid=bob,ou=People,{{ LDAP_BASE_DN }}
+
+dn: uid=httpalfresco,ou=People,{{ LDAP_BASE_DN }}
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: httpalfresco
+sn: Http Alfreso
+uid: httpalfresco
+userPassword: password
+mail: httpalfresco@example.com
