@@ -90,8 +90,8 @@ services:
                 -Dsynchronization.autoCreatePeopleOnLogin=false
                 -Dldap.synchronization.active=true
 
-                -Dldap.synchronization.java.naming.security.principal=httpalfresco@example.com
-                -Dldap.synchronization.java.naming.security.credentials=admin
+                -Dldap.synchronization.java.naming.security.principal=httpalfresco
+                -Dldap.synchronization.java.naming.security.credentials=password
                 -Dldap.synchronization.groupSearchBase=OU=groups,DC=example,DC=com
                 -Dldap.synchronization.userSearchBase=OU=People,DC=example,DC=com
 
