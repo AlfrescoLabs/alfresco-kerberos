@@ -104,9 +104,6 @@ services:
 
                 -Dauthentication.chain=kerberos1:kerberos,alfrescoNtlm1:alfrescoNtlm,ldap1:ldap-ad
                 "
-      volumes:
-          # For sharing keytab files from Kerberos
-          - ./keytabs:/etc
       depends_on:
         - openldap
       links:
