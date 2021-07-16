@@ -38,7 +38,7 @@ services:
         ipv4_address: 192.168.55.10
 
   alfresco:
-       image: dhrn/alfresco-content-repository:latest
+      image: dhrn/alfresco-content-repository:latest
       container_name: alfresco
       hostname: alfresco
       extra_hosts:
