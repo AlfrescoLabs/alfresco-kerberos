@@ -33,6 +33,9 @@ services:
       - 88:88
       - 464:464
       - 749:749
+    volumes:
+      # For sharing keytab files to Keycloak
+      - ./keytabs:/etc/keytabs
     networks:
       alfresco-network:
         ipv4_address: 192.168.55.10
@@ -45,7 +48,6 @@ services:
         context: ./alfresco
       extra_hosts:
         - "example.com:192.168.55.10"
-#        - "dc01:192.168.100.25"
       environment:
         JAVA_OPTS: "
                 -Ddb.driver=org.postgresql.Driver
@@ -104,6 +106,9 @@ services:
 
                 -Dauthentication.chain=kerberos1:kerberos,alfrescoNtlm1:alfrescoNtlm,ldap1:ldap-ad
                 "
+      volumes:
+      # For sharing keytab files to Keycloak
+        - ./keytabs:/etc/keytabs
       depends_on:
         - openldap
       links:
