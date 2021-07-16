@@ -2,10 +2,6 @@
 # todo remove this
 #docker system prune -a --volumes -f;
 
-cd alfresco;
-docker build -t dhrn/alfresco-content-repository:latest .
-cd ..;
-
 docker-compose up -d;
 sleep 60;
 
