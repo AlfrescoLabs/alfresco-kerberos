@@ -99,7 +99,7 @@ services:
                 -Dkerberos.authentication.user.configEntryName=Alfresco
                 -Dkerberos.authentication.defaultAdministratorUserNames=admin
                 -Dkerberos.authentication.http.configEntryName=AlfrescoHTTP
-                -Dkerberos.authentication.http.password=HeyH0Password
+                -Dkerberos.authentication.http.password=password
                 -Dkerberos.authentication.sso.enabled=true
 
                 -Dauthentication.chain=kerberos1:kerberos,alfrescoNtlm1:alfrescoNtlm,ldap1:ldap-ad
