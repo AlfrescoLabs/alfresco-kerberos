@@ -96,10 +96,10 @@ services:
                 -Dldap.synchronization.userSearchBase=OU=People,DC=example,DC=com
 
                 -Dkerberos.authentication.realm=EXAMPLE.COM
-                -Dkerberos.authentication.user.configEntryName=Alfresco
+                -Dkerberos.authentication.user.configEntryName=cn=admin,dc=example,dc=com
                 -Dkerberos.authentication.defaultAdministratorUserNames=admin
                 -Dkerberos.authentication.http.configEntryName=AlfrescoHTTP
-                -Dkerberos.authentication.http.password=password
+                -Dkerberos.authentication.http.password=admin
                 -Dkerberos.authentication.sso.enabled=true
 
                 -Dauthentication.chain=kerberos1:kerberos,alfrescoNtlm1:alfrescoNtlm,ldap1:ldap-ad
