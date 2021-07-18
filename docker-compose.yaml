@@ -32,7 +32,7 @@ services:
       - 88:88
       - 464:464
       - 749:749
-    volumes:
+#    volumes:
       # For sharing keytab files to Keycloak
 #      - ./keytabs:/etc/keytabs
     networks:
