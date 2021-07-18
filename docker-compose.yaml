@@ -34,7 +34,7 @@ services:
       - 749:749
     volumes:
       # For sharing keytab files to Keycloak
-      - ./keytabs:/etc/keytabs
+#      - ./keytabs:/etc/keytabs
     networks:
       alfresco-network:
         ipv4_address: 192.168.55.10
