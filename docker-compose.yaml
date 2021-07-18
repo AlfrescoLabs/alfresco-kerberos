@@ -98,9 +98,9 @@ services:
 
                 -Dkerberos.authentication.realm=EXAMPLE.COM
                 -Dkerberos.authentication.user.configEntryName=Alfresco
-                -Dkerberos.authentication.defaultAdministratorUserNames=httpalfresco
+                -Dkerberos.authentication.defaultAdministratorUserNames=dn=uid=httpalfresco,ou=People,dc=example,dc=com
                 -Dkerberos.authentication.http.configEntryName=AlfrescoHTTP
-                -Dkerberos.authentication.http.password=HeyH0Password
+                -Dkerberos.authentication.http.password=password
                 -Dkerberos.authentication.sso.enabled=true
 
                 -Dauthentication.chain=kerberos1:kerberos,alfrescoNtlm1:alfrescoNtlm,ldap1:ldap-ad
