@@ -72,3 +72,8 @@ sn: Http Alfresco
 uid: httpalfresco
 userPassword: password
 mail: httpalfresco@example.com
+
+dn: ou=groups,dc=example,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
