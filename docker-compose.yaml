@@ -85,7 +85,7 @@ services:
                 -Dldap.authentication.allowGuestLogin=false
                 -Dldap.authentication.userNameFormat=%s@example.com
                 -Dldap.authentication.java.naming.provider.url=ldap://openldap:389
-                -Dldap.authentication.defaultAdministratorUserNames=admin
+                -Dldap.authentication.defaultAdministratorUserNames=administrator,admin,adminAlfresco,administrador
                 -Dldap.authentication.active=false
 
                 -Dsynchronization.autoCreatePeopleOnLogin=false
@@ -98,7 +98,7 @@ services:
 
                 -Dkerberos.authentication.realm=EXAMPLE.COM
                 -Dkerberos.authentication.user.configEntryName=Alfresco
-                -Dkerberos.authentication.defaultAdministratorUserNames=admin
+                -Dkerberos.authentication.defaultAdministratorUserNames=administrator,admin,adminAlfresco,administrador
                 -Dkerberos.authentication.http.configEntryName=AlfrescoHTTP
                 -Dkerberos.authentication.http.password=password
                 -Dkerberos.authentication.sso.enabled=true

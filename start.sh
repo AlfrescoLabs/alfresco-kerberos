@@ -4,7 +4,7 @@
 
 docker-compose down -v;
 sleep 10;
-rm -rf ./keytabs && mkdir keytabs;
+rm -rf ./keytabs/*keytab;
 
 docker-compose build;
 docker-compose up -d;
@@ -18,6 +18,8 @@ docker exec -ti kerberos kadmin.local -q "addprinc -pw password  -x dn=uid=alice
 # Add principles for KeyCloak and generate keytab
 docker exec -ti kerberos kadmin.local -q "addprinc -pw password -x dn=uid=httpalfresco,ou=People,dc=example,dc=com HTTP/example.com@EXAMPLE.COM"
 docker exec -ti kerberos kadmin.local -q "ktadd -k /etc/keytabs/alfresco.keytab HTTP/example.com@EXAMPLE.COM"
+
+docker exec -ti kerberos kadmin.local -q "list_principals"
 
 docker-compose restart alfresco
 
