@@ -20,7 +20,6 @@ services:
       - vol-openldap-slapd:/etc/ldap/slapd.d
     networks:
       alfresco-network:
-        ipv4_address: 192.168.55.5
 
   kerberos:
     image: nugaon/kerberos-with-ldap
@@ -33,6 +32,9 @@ services:
       - 88:88
       - 464:464
       - 749:749
+#    volumes:
+      # For sharing keytab files to Keycloak
+#      - ./keytabs:/etc/keytabs
     networks:
       alfresco-network:
         ipv4_address: 192.168.55.10
@@ -45,7 +47,6 @@ services:
         context: ./alfresco
       extra_hosts:
         - "example.com:192.168.55.10"
-#        - "dc01:192.168.100.25"
       environment:
         JAVA_OPTS: "
                 -Ddb.driver=org.postgresql.Driver
@@ -58,10 +59,10 @@ services:
                 -Dsolr.base.url=/solr
                 -Dindex.subsystem.name=solr6
                 -Dshare.host=127.0.0.1
-                -Dshare.port=8080
+                -Dshare.port=80
                 -Dalfresco.host=localhost
-                -Dalfresco.port=8080
-                -Daos.baseUrlOverwrite=http://localhost:8080/alfresco/aos
+                -Dalfresco.port=80
+                -Daos.baseUrlOverwrite=http://localhost:80/alfresco/aos
                 -Dmessaging.broker.url=\"failover:(nio://activemq:61616)?timeout=3000&jms.useCompression=true\"
                 -Ddeployment.method=DOCKER_COMPOSE
 
@@ -84,26 +85,34 @@ services:
                 -Dldap.authentication.allowGuestLogin=false
                 -Dldap.authentication.userNameFormat=%s@example.com
                 -Dldap.authentication.java.naming.provider.url=ldap://openldap:389
-                -Dldap.authentication.defaultAdministratorUserNames=admin
+                -Dldap.authentication.defaultAdministratorUserNames=administrator,admin,adminAlfresco,administrador
                 -Dldap.authentication.active=false
 
                 -Dsynchronization.autoCreatePeopleOnLogin=false
                 -Dldap.synchronization.active=true
 
-                -Dldap.synchronization.java.naming.security.principal=httpalfresco@example.com
+                -Dldap.synchronization.java.naming.security.principal=cn=admin,dc=example,dc=com
                 -Dldap.synchronization.java.naming.security.credentials=admin
-                -Dldap.synchronization.groupSearchBase=OU=groups,DC=example,DC=com
-                -Dldap.synchronization.userSearchBase=OU=People,DC=example,DC=com
+                -Dldap.synchronization.groupSearchBase=\"dc\\=example,dc\\=com\"
+                -Dldap.synchronization.userIdAttributeName=uid
+                -Dldap.synchronization.userFirstNameAttributeName=cn
+                -Dldap.synchronization.userLastNameAttributeName=sn
+                -Dldap.synchronization.userEmailAttributeName=mail
+                -Dldap.synchronization.personQuery=\"(objectclass\\=person)\"
+                -Dldap.synchronization.userSearchBase=\"dc=example,dc=com\"
 
                 -Dkerberos.authentication.realm=EXAMPLE.COM
                 -Dkerberos.authentication.user.configEntryName=Alfresco
-                -Dkerberos.authentication.defaultAdministratorUserNames=admin
+                -Dkerberos.authentication.defaultAdministratorUserNames=administrator,admin,adminAlfresco,administrador
                 -Dkerberos.authentication.http.configEntryName=AlfrescoHTTP
-                -Dkerberos.authentication.http.password=HeyH0Password
+                -Dkerberos.authentication.http.password=password
                 -Dkerberos.authentication.sso.enabled=true
 
                 -Dauthentication.chain=kerberos1:kerberos,alfrescoNtlm1:alfrescoNtlm,ldap1:ldap-ad
                 "
+#      volumes:
+#       # For sharing keytab files to Keycloak
+#        - ./keytabs:/etc/keytabs
       depends_on:
         - openldap
       links:
@@ -171,7 +180,7 @@ services:
       environment:
         #Solr needs to know how to register itself with Alfresco
         - SOLR_ALFRESCO_HOST=alfresco
-        - SOLR_ALFRESCO_PORT=8080
+        - SOLR_ALFRESCO_PORT=80
         #Alfresco needs to know how to call solr
         - SOLR_SOLR_HOST=solr6
         - SOLR_SOLR_PORT=8983
@@ -197,6 +206,8 @@ services:
 
   digital-workspace:
       image: quay.io/alfresco/alfresco-digital-workspace:1.6.0
+      container_name: workspace
+      hostname: workspace
       environment:
         BASE_PATH: ./
       networks:
@@ -204,14 +215,19 @@ services:
 
   proxy:
       image: alfresco/alfresco-acs-nginx:3.0.1
+      container_name: proxy
+      volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       depends_on:
         - alfresco
         - digital-workspace
       ports:
-        - 8080:8080
+        - 80:80
       links:
         - digital-workspace
         - alfresco
+      networks:
+        alfresco-network:
 
 networks:
   alfresco-network:

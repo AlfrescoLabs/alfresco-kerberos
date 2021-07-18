@@ -68,7 +68,12 @@ objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: httpalfresco
-sn: Http Alfreso
+sn: Http Alfresco
 uid: httpalfresco
 userPassword: password
 mail: httpalfresco@example.com
+
+dn: ou=groups,dc=example,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: groups

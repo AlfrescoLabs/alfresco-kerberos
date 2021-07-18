@@ -1,18 +1,39 @@
-## start env
-# todo remove this
-#docker system prune -a --volumes -f;
+printf "\n======== stop the running env ========\n\n"
 
+docker-compose down -v;
+sleep 10;
+rm -rf ./keytabs/*keytab;
+
+printf "\n======== build and run docker images ========\n\n"
+docker-compose build;
 docker-compose up -d;
+
+printf "\n======== wait for ldap and kerberos sync ========\n\n"
+# increase the time out if ldap and kerberos are getting connected in 1 min
 sleep 60;
+
+printf "\n======== indexing the LDAP user with Kerberos ========\n\n"
 
 ## index ldap user
 docker exec -ti kerberos kadmin.local -q "addprinc -pw password -x dn=uid=alice,ou=People,dc=example,dc=com alice"
-docker exec -ti kerberos kadmin.local -q "addprinc -pw password  -x dn=uid=alice,ou=People,dc=example,dc=com bob"
-docker exec -ti kerberos kadmin.local -q "addprinc -pw password  -x dn=uid=httpalfresco,ou=People,dc=example,dc=com httpalfresco"
+docker exec -ti kerberos kadmin.local -q "addprinc -pw password  -x dn=uid=bob,ou=People,dc=example,dc=com bob"
 
-#docker exec -ti kerberos mkdir -p /opt/
-#docker exec -ti kerberos printf "%b" "add_entry -password -p httpalfresco@EXAMPLE.COM -k 1 -e aes256-cts-hmac-sha1-96\npassword\nwrite_kt alfresco.keytab" | ktutil
+printf "\n======== create kerberos principles for server ========\n\n"
+# Add principles for Alfresco and generate keytab
+docker exec -ti kerberos kadmin.local -q "addprinc -pw password -x dn=uid=httpalfresco,ou=People,dc=example,dc=com HTTP/example.com@EXAMPLE.COM"
+docker exec -ti kerberos kadmin.local -q "ktadd -k alfresco.keytab HTTP/example.com@EXAMPLE.COM"
+
+printf "\n======== Available principles in the kerberos ========\n\n"
+docker exec -ti kerberos kadmin.local -q "list_principals"
+
+printf "\n======== configure the Alfresco with Kerberos ========\n\n"
+KERBEROS=$(docker-compose ps -q kerberos);
+ALFRESCO=$(docker-compose ps -q alfresco);
+docker cp ${KERBEROS}:/alfresco.keytab ./keytabs/
+chmod 777 ./keytabs/alfresco.keytab
+docker cp ./keytabs/alfresco.keytab ${ALFRESCO}:/etc/alfresco.keytab
 
 docker-compose restart alfresco
 
-docker logs -f alfresco
+printf "\n======== kerberos configuration is over. Here is the tail ========\n\n"
+docker logs -f alfresco &
