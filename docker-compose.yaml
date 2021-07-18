@@ -94,7 +94,7 @@ services:
                 -Dldap.synchronization.java.naming.security.principal=cn=admin,dc=example,dc=com
                 -Dldap.synchronization.java.naming.security.credentials=admin
                 -Dldap.synchronization.groupSearchBase=DC=example,DC=com
-                -Dldap.synchronization.personQuery=\"(objectclass\=person)\"
+                -Dldap.synchronization.personQuery=\"(objectclass\\=person)\"
                 -Dldap.synchronization.userSearchBase=DC=example,DC=com
 
                 -Dkerberos.authentication.realm=EXAMPLE.COM
