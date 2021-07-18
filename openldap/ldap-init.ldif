@@ -82,4 +82,5 @@ dn: cn=sso,ou=groups,dc=example,dc=com
 objectClass: groupOfNames
 objectClass: top
 cn: sso
+description: people with infrastructure sso access
 member: uid=httpalfresco,ou=People,dc=example,dc=com
