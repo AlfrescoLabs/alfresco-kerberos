@@ -36,4 +36,4 @@ docker cp ./keytabs/alfresco.keytab ${ALFRESCO}:/etc/alfresco.keytab
 docker-compose restart alfresco
 
 printf "\n======== kerberos configuration is over. Here is the tail ========\n\n"
-docker logs -f alfresco
+docker logs -f alfresco &
