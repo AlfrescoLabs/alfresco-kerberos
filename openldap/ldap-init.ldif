@@ -47,6 +47,7 @@ dn: cn=ldap-user,ou=RealmRoles,{{ LDAP_BASE_DN }}
 objectclass: top
 objectclass: groupOfNames
 cn: ldap-user
+description: people with ldap user access
 member: uid=alice,ou=People,{{ LDAP_BASE_DN }}
 member: uid=bob,ou=People,{{ LDAP_BASE_DN }}
 
@@ -54,6 +55,7 @@ dn: cn=ldap-admin,ou=RealmRoles,{{ LDAP_BASE_DN }}
 objectclass: top
 objectclass: groupOfNames
 cn: ldap-admin
+description: people with ldap admin access
 member: uid=alice,ou=People,{{ LDAP_BASE_DN }}
 
 dn: cn=accountant,ou=FinanceRoles,{{ LDAP_BASE_DN }}
