@@ -77,3 +77,9 @@ dn: ou=groups,dc=example,dc=com
 objectClass: organizationalUnit
 objectClass: top
 ou: groups
+
+dn: cn=sso,ou=groups,dc=example,dc=com
+objectClass: groupOfNames
+objectClass: top
+cn: sso
+member: uid=httpalfresco,ou=People,dc=example,dc=com
