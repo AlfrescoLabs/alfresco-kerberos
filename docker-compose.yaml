@@ -218,6 +218,8 @@ services:
       links:
         - digital-workspace
         - alfresco
+      networks:
+        alfresco-network:
 
 networks:
   alfresco-network:
