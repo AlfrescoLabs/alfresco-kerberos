@@ -85,22 +85,22 @@ services:
                 -Dldap.authentication.allowGuestLogin=false
                 -Dldap.authentication.userNameFormat=%s@example.com
                 -Dldap.authentication.java.naming.provider.url=ldap://openldap:389
-                -Dldap.authentication.defaultAdministratorUserNames=admin
+                -Dldap.authentication.defaultAdministratorUserNames=httpalfresco
                 -Dldap.authentication.active=false
 
                 -Dsynchronization.autoCreatePeopleOnLogin=false
                 -Dldap.synchronization.active=true
 
-                -Dldap.synchronization.java.naming.security.principal=httpalfresco
+                -Dldap.synchronization.java.naming.security.principal=alfresco.ldap@example.com
                 -Dldap.synchronization.java.naming.security.credentials=password
                 -Dldap.synchronization.groupSearchBase=OU=groups,DC=example,DC=com
                 -Dldap.synchronization.userSearchBase=OU=People,DC=example,DC=com
 
                 -Dkerberos.authentication.realm=EXAMPLE.COM
-                -Dkerberos.authentication.user.configEntryName=dn=uid=httpalfresco,ou=People,dc=example,dc=com
-                -Dkerberos.authentication.defaultAdministratorUserNames=admin
-                -Dkerberos.authentication.http.configEntryName=Alfresco
-                -Dkerberos.authentication.http.password=password
+                -Dkerberos.authentication.user.configEntryName=Alfresco
+                -Dkerberos.authentication.defaultAdministratorUserNames=httpalfresco
+                -Dkerberos.authentication.http.configEntryName=AlfrescoHTTP
+                -Dkerberos.authentication.http.password=HeyH0Password
                 -Dkerberos.authentication.sso.enabled=true
 
                 -Dauthentication.chain=kerberos1:kerberos,alfrescoNtlm1:alfrescoNtlm,ldap1:ldap-ad
