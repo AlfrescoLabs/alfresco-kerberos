@@ -204,12 +204,13 @@ services:
       networks:
         alfresco-network:
 
-  digital-workspace:
-      image: quay.io/alfresco/alfresco-digital-workspace:1.6.0
+  workspace:
+      image: dhrn/demo-shell:latest
       container_name: workspace
       hostname: workspace
       environment:
         BASE_PATH: ./
+        APP_CONFIG_AUTH_TYPE: ECM
       networks:
         alfresco-network:
 
