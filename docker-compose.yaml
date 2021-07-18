@@ -20,7 +20,6 @@ services:
       - vol-openldap-slapd:/etc/ldap/slapd.d
     networks:
       alfresco-network:
-        ipv4_address: 192.168.55.5
 
   kerberos:
     image: nugaon/kerberos-with-ldap
@@ -60,10 +59,10 @@ services:
                 -Dsolr.base.url=/solr
                 -Dindex.subsystem.name=solr6
                 -Dshare.host=127.0.0.1
-                -Dshare.port=8080
+                -Dshare.port=80
                 -Dalfresco.host=localhost
-                -Dalfresco.port=8080
-                -Daos.baseUrlOverwrite=http://localhost:8080/alfresco/aos
+                -Dalfresco.port=80
+                -Daos.baseUrlOverwrite=http://localhost:80/alfresco/aos
                 -Dmessaging.broker.url=\"failover:(nio://activemq:61616)?timeout=3000&jms.useCompression=true\"
                 -Ddeployment.method=DOCKER_COMPOSE
 
@@ -176,7 +175,7 @@ services:
       environment:
         #Solr needs to know how to register itself with Alfresco
         - SOLR_ALFRESCO_HOST=alfresco
-        - SOLR_ALFRESCO_PORT=8080
+        - SOLR_ALFRESCO_PORT=80
         #Alfresco needs to know how to call solr
         - SOLR_SOLR_HOST=solr6
         - SOLR_SOLR_PORT=8983
@@ -209,11 +208,13 @@ services:
 
   proxy:
       image: alfresco/alfresco-acs-nginx:3.0.1
+      volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       depends_on:
         - alfresco
         - digital-workspace
       ports:
-        - 8080:8080
+        - 80:80
       links:
         - digital-workspace
         - alfresco
