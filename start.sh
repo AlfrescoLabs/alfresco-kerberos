@@ -22,8 +22,9 @@ docker exec -ti kerberos kadmin.local -q "ktadd -k alfresco.keytab HTTP/example.
 docker exec -ti kerberos kadmin.local -q "list_principals"
 
 KERBEROS=$(docker-compose ps -q kerberos);
-docker cp $(KERBEROS):/alfresco.keytab ./keytabs/
-chmod 777 keytabs
+ALFRESCO=$(docker-compose ps -q alfresco);
+docker cp ${KERBEROS}:/alfresco.keytab ./keytabs/
+docker cp ./keytabs/alfresco.keytab ${ALFRESCO}:/etc/alfresco.keytab
 
 docker-compose restart alfresco
 
