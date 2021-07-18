@@ -7,6 +7,9 @@ rm -rf ./keytabs/*keytab;
 printf "\n======== build and run docker images ========\n\n"
 docker-compose build;
 docker-compose up -d;
+
+printf "\n======== wait for finish ldap and kerberos ========\n\n"
+# increase the time out if ldap and kerberos are getting connected in 1 min
 sleep 60;
 
 printf "\n======== indexing the LDAP user with Kerberos ========\n\n"
