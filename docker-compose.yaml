@@ -105,9 +105,9 @@ services:
 
                 -Dauthentication.chain=kerberos1:kerberos,alfrescoNtlm1:alfrescoNtlm,ldap1:ldap-ad
                 "
-      volumes:
-      # For sharing keytab files to Keycloak
-        - ./keytabs:/etc/keytabs
+#      volumes:
+#       # For sharing keytab files to Keycloak
+#        - ./keytabs:/etc/keytabs
       depends_on:
         - openldap
       links:
