@@ -207,6 +207,7 @@ services:
   digital-workspace:
       image: quay.io/alfresco/alfresco-digital-workspace:1.6.0
       container_name: workspace
+      hostname: workspace
       environment:
         BASE_PATH: ./
       networks:
@@ -215,13 +216,13 @@ services:
   proxy:
       image: alfresco/alfresco-acs-nginx:3.0.1
       container_name: proxy
-#      volumes:
-#      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       depends_on:
         - alfresco
         - digital-workspace
       ports:
-        - 8080:8080
+        - 80:80
       links:
         - digital-workspace
         - alfresco
