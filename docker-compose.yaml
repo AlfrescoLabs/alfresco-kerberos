@@ -197,7 +197,7 @@ services:
       networks:
         alfresco-network:
 
-  workspace:
+  demoshell:
       image: dhrn/demo-shell:latest
       container_name: workspace
       hostname: workspace
@@ -214,11 +214,11 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       depends_on:
         - alfresco
-        - workspace
+        - demoshell
       ports:
         - 80:80
       links:
-        - workspace
+        - demoshell
         - alfresco
       networks:
         alfresco-network:
