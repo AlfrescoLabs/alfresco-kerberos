@@ -85,13 +85,13 @@ services:
                 -Dldap.authentication.allowGuestLogin=false
                 -Dldap.authentication.userNameFormat=%s@example.com
                 -Dldap.authentication.java.naming.provider.url=ldap://openldap:389
-                -Dldap.authentication.defaultAdministratorUserNames=httpalfresco
+                -Dldap.authentication.defaultAdministratorUserNames=admin
                 -Dldap.authentication.active=false
 
                 -Dsynchronization.autoCreatePeopleOnLogin=false
                 -Dldap.synchronization.active=true
 
-                -Dldap.synchronization.java.naming.security.principal=alfresco.ldap@example.com
+                -Dldap.synchronization.java.naming.security.principal=httpalfresco
                 -Dldap.synchronization.java.naming.security.credentials=password
                 -Dldap.synchronization.groupSearchBase=OU=groups,DC=example,DC=com
                 -Dldap.synchronization.userSearchBase=OU=People,DC=example,DC=com
