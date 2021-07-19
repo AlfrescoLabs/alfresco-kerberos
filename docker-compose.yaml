@@ -27,6 +27,8 @@ services:
       LDAP_URL: "ldap://openldap:389"
     depends_on:
       - openldap
+    volumes:
+    - ./kerberos/config.sh:/config.sh
     ports:
       - 88:88
       - 464:464
