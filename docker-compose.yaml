@@ -234,11 +234,13 @@ services:
       depends_on:
         - alfresco
         - demoshell
+        - share
       ports:
         - 80:80
       links:
         - demoshell
         - alfresco
+        - share
       networks:
         alfresco-network:
 
