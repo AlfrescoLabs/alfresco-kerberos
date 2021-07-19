@@ -132,7 +132,7 @@ services:
                  -Dalfresco.context=alfresco
                  -Dalfresco.protocol=http
                  "
-      networks:
+    networks:
         alfresco-network:
 
   transform-router:
