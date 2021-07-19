@@ -79,6 +79,17 @@ uid: httpalfresco
 userPassword: password
 mail: httpalfresco@example.com
 
+dn: uid=httpshare,ou=People,{{ LDAP_BASE_DN }}
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: httpshare
+sn: http share
+uid: httpshare
+userPassword: password
+mail: httpshare@example.com
+
 dn: ou=groups,{{ LDAP_BASE_DN }}
 objectClass: organizationalUnit
 objectClass: top
@@ -88,6 +99,7 @@ dn: cn=sso,ou=groups,{{ LDAP_BASE_DN }}
 objectClass: groupOfNames
 cn: sso
 member: uid=httpalfresco,ou=People,{{ LDAP_BASE_DN }}
+member: uid=httpshare,ou=People,{{ LDAP_BASE_DN }}
 
 dn: cn=all-users,ou=groups,{{ LDAP_BASE_DN }}
 cn: all-users
