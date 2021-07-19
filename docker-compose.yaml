@@ -117,8 +117,6 @@ services:
     hostname: share
     build:
       context: ./share
-    depends_on:
-      - alfresco
     extra_hosts:
       - "example.com:192.168.55.10"
     environment:
@@ -134,6 +132,8 @@ services:
                  -Dalfresco.protocol=http
                  "
     links:
+      - alfresco
+    depends_on:
       - alfresco
     networks:
         alfresco-network:
