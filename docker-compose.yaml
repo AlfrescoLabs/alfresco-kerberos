@@ -117,6 +117,8 @@ services:
     hostname: share
     build:
       context: ./share
+    depends_on:
+      - alfresco
     extra_hosts:
       - "example.com:192.168.55.10"
     environment:
