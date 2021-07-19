@@ -1,4 +1,11 @@
 # Alfresco Kerberos Test
+### How to run 
+```shell
+    ./start.sh
+    # assuming the docker compose created env correctly
+    kinit #authendicate with user
+    google-chrome  --auth-server-whitelist="http://example.com" --auth-negotiate-delegate-whitelist="http://example.com"
+```
 
 ### LDAP Details
 
