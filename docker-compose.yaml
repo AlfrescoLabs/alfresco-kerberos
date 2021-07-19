@@ -129,6 +129,7 @@ services:
                  -Xmx500m
                  -Dalfresco.host=localhost
                  -Dalfresco.port=80
+                 -Dsun.security.krb5.msinterop.kstring=true
                  -Dalfresco.context=alfresco
                  -Dalfresco.protocol=http
                  "
