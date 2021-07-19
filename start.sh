@@ -22,9 +22,6 @@ printf "\n======== create kerberos principles for server ========\n\n"
 # Add principles for Alfresco and generate keytab
 docker exec -ti kerberos kadmin.local -q "addprinc -pw password -x dn=uid=httpalfresco,ou=People,dc=example,dc=com HTTP/example.com@EXAMPLE.COM"
 docker exec -ti kerberos kadmin.local -q "ktadd -k alfresco.keytab HTTP/example.com@EXAMPLE.COM"
-
-# Add principles for Share and generate keytab
-docker exec -ti kerberos kadmin.local -q "addprinc -pw password -x dn=uid=httpshare,ou=People,dc=example,dc=com HTTP/example.com@EXAMPLE.COM"
 docker exec -ti kerberos kadmin.local -q "ktadd -k share.keytab HTTP/example.com@EXAMPLE.COM"
 
 printf "\n======== Available principles in the kerberos ========\n\n"
