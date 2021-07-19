@@ -90,17 +90,8 @@ services:
                 -Dldap.synchronization.java.naming.security.principal=cn=admin,dc=example,dc=com
                 -Dldap.synchronization.java.naming.security.credentials=admin
 
-                -Dldap.synchronization.groupIdAttributeName=cn
-                -Dldap.synchronization.groupDisplayNameAttributeName=cn
-                -Dldap.synchronization.groupType=groupOfNames
-                -Dldap.synchronization.groupQuery=\"(objectclass\\=groupOfNames)\"
                 -Dldap.synchronization.groupSearchBase=\"dc=example,dc=com\"
 
-                -Dldap.synchronization.userIdAttributeName=uid
-                -Dldap.synchronization.userFirstNameAttributeName=cn
-                -Dldap.synchronization.userLastNameAttributeName=sn
-                -Dldap.synchronization.userEmailAttributeName=mail
-                -Dldap.synchronization.personQuery=\"(objectclass\\=person)\"
                 -Dldap.synchronization.userSearchBase=\"dc=example,dc=com\"
 
                 -Dkerberos.authentication.realm=EXAMPLE.COM
