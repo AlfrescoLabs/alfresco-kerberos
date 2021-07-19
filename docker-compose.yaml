@@ -133,7 +133,6 @@ services:
                  -Dalfresco.protocol=http
                  "
 
-
   transform-router:
       image: quay.io/alfresco/alfresco-transform-router:1.3.2
       environment:
