@@ -29,11 +29,16 @@ docker exec -ti kerberos kadmin.local -q "list_principals"
 printf "\n======== configure the Alfresco with Kerberos ========\n\n"
 KERBEROS=$(docker-compose ps -q kerberos);
 ALFRESCO=$(docker-compose ps -q alfresco);
+SHARE=$(docker-compose ps -q share);
+
 docker cp ${KERBEROS}:/alfresco.keytab ./keytabs/
 chmod 777 ./keytabs/alfresco.keytab
 docker cp ./keytabs/alfresco.keytab ${ALFRESCO}:/etc/alfresco.keytab
+docker cp ./keytabs/alfresco.keytab ${SHARE}:/etc/share.keytab
 
 docker-compose restart alfresco
+docker-compose restart share
 
 printf "\n======== kerberos configuration is over. Here is the tail ========\n\n"
-docker logs -f alfresco &
+#docker logs -f alfresco &
+#docker logs -f share &
