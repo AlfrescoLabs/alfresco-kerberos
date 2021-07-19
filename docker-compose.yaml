@@ -132,6 +132,8 @@ services:
                  -Dalfresco.context=alfresco
                  -Dalfresco.protocol=http
                  "
+      networks:
+        alfresco-network:
 
   transform-router:
       image: quay.io/alfresco/alfresco-transform-router:1.3.2
