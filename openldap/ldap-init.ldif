@@ -72,6 +72,7 @@ dn: uid=httpalfresco,ou=People,{{ LDAP_BASE_DN }}
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
+objectclass: inetOrgPerson
 cn: httpalfresco
 sn: Http Alfresco
 uid: httpalfresco
