@@ -4,7 +4,6 @@ services:
   openldap:
     image: osixia/openldap
     ports:
-      # LDAP
       - 389:389
       - 636:636
     env_file:
@@ -32,9 +31,6 @@ services:
       - 88:88
       - 464:464
       - 749:749
-#    volumes:
-      # For sharing keytab files to Keycloak
-#      - ./keytabs:/etc/keytabs
     networks:
       alfresco-network:
         ipv4_address: 192.168.55.10
@@ -93,12 +89,9 @@ services:
 
                 -Dldap.synchronization.java.naming.security.principal=cn=admin,dc=example,dc=com
                 -Dldap.synchronization.java.naming.security.credentials=admin
-                -Dldap.synchronization.groupSearchBase=\"dc\\=example,dc\\=com\"
-                -Dldap.synchronization.userIdAttributeName=uid
-                -Dldap.synchronization.userFirstNameAttributeName=cn
-                -Dldap.synchronization.userLastNameAttributeName=sn
-                -Dldap.synchronization.userEmailAttributeName=mail
-                -Dldap.synchronization.personQuery=\"(objectclass\\=person)\"
+
+                -Dldap.synchronization.groupSearchBase=\"dc=example,dc=com\"
+
                 -Dldap.synchronization.userSearchBase=\"dc=example,dc=com\"
 
                 -Dkerberos.authentication.realm=EXAMPLE.COM
@@ -110,9 +103,6 @@ services:
 
                 -Dauthentication.chain=kerberos1:kerberos,alfrescoNtlm1:alfrescoNtlm,ldap1:ldap-ad
                 "
-#      volumes:
-#       # For sharing keytab files to Keycloak
-#        - ./keytabs:/etc/keytabs
       depends_on:
         - openldap
       links:
@@ -204,12 +194,13 @@ services:
       networks:
         alfresco-network:
 
-  digital-workspace:
-      image: quay.io/alfresco/alfresco-digital-workspace:1.6.0
+  demoshell:
+      image: dhrn/demo-shell:latest
       container_name: workspace
       hostname: workspace
       environment:
         BASE_PATH: ./
+        APP_CONFIG_AUTH_TYPE: ECM
       networks:
         alfresco-network:
 
@@ -220,11 +211,11 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       depends_on:
         - alfresco
-        - digital-workspace
+        - demoshell
       ports:
         - 80:80
       links:
-        - digital-workspace
+        - demoshell
         - alfresco
       networks:
         alfresco-network:
