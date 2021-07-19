@@ -86,7 +86,6 @@ ou: groups
 
 dn: cn=sso,ou=groups,{{ LDAP_BASE_DN }}
 objectClass: groupOfNames
-objectClass: top
 cn: sso
 member: uid=httpalfresco,ou=People,{{ LDAP_BASE_DN }}
 
