@@ -44,6 +44,7 @@ chmod 777 ./keytabs/share.keytab
 docker cp ./keytabs/share.keytab ${SHARE}:/etc/share.keytab
 
 docker-compose restart alfresco
+docker-compose restart share
 
 printf "\n======== kerberos configuration is over. Here is the tail ========\n\n"
 docker logs -f alfresco &
