@@ -116,7 +116,7 @@ services:
     container_name: share
     hostname: share
     build:
-      context: ./config/share
+      context: ./share
     extra_hosts:
       - "example.com:192.168.55.10"
     environment:
