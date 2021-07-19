@@ -101,7 +101,7 @@ restart_kdc() {
 }
 
 create_admin_user() {
-  kadmin.local -q "addprinc -x cn=$KERB_ADMIN_USER,$LDAP_DC admin" <<EOF
+  kadmin.local -q "addprinc -x dn=cn=$KERB_ADMIN_USER,$LDAP_DC admin" <<EOF
 $LDAP_PASS
 $LDAP_PASS
 EOF
