@@ -41,3 +41,4 @@ docker-compose restart share
 
 printf "\n======== kerberos configuration is over. Here is the tail ========\n\n"
 docker logs -f alfresco &
+docker logs -f share &
