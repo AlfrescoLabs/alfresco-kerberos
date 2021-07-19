@@ -21,11 +21,11 @@ ShareHTTP
    keyTab="/etc/share.keytab"
    principal="HTTP/example.com@EXAMPLE.COM";
 };
-
+          
   com.sun.net.ssl.client {
     com.sun.security.auth.module.Krb5LoginModule sufficient;
 };
-
+          
 other {
   com.sun.security.auth.module.Krb5LoginModule sufficient;
 };
