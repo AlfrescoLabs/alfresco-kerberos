@@ -118,7 +118,7 @@ services:
     build:
       context: ./share
     depends_on:
-      - openldap
+      - alfresco
     extra_hosts:
       - "example.com:192.168.55.10"
     environment:
