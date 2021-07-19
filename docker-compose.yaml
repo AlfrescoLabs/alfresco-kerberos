@@ -117,7 +117,6 @@ services:
     hostname: share
     build:
       context: ./config/share
-    mem_limit: 1g
     extra_hosts:
       - "example.com:192.168.55.10"
     environment:
