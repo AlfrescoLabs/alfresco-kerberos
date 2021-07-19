@@ -132,6 +132,8 @@ services:
                  -Dalfresco.context=alfresco
                  -Dalfresco.protocol=http
                  "
+    links:
+      - alfresco
     networks:
         alfresco-network:
 
