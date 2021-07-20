@@ -91,10 +91,11 @@ services:
                 -Dldap.synchronization.java.naming.security.principal=cn=admin,dc=example,dc=com
                 -Dldap.synchronization.java.naming.security.credentials=admin
 
-                -Dldap.synchronization.groupQuery=\"(objectclass\\=groupOfNames)\"
+                -Dldap.synchronization.groupQuery=\"(objectclass=groupOfNames)\"
                 -Dldap.synchronization.groupSearchBase=\"dc=example,dc=com\"
 
-                -Dldap.synchronization.personQuery=\"(objectclass\\=inetOrgPerson)\"
+                -Dldap.synchronization.userIdAttributeName=uid
+                -Dldap.synchronization.personQuery=\"(objectclass=inetOrgPerson)\"
                 -Dldap.synchronization.userSearchBase=\"dc=example,dc=com\"
 
                 -Dkerberos.authentication.realm=EXAMPLE.COM
