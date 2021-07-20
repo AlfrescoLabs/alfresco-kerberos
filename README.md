@@ -1,5 +1,7 @@
 # Alfresco Kerberos
    This project provides the simple alfresco with kerberos enabled env for testing purposes.
+   ![kerberos env](https://docs.alfresco.com/identity-service/images/kerberos.png)
+   
 
 ### How to run 
 ```shell
