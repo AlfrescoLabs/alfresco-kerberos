@@ -1,4 +1,4 @@
-FROM alfresco/alfresco-content-repository:6.2.2
+FROM alfresco/alfresco-content-repository:6.2.2.3
 
 # Customize container: Single Sign On via Kerberos
 

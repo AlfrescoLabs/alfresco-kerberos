@@ -17,6 +17,7 @@ printf "\n======== indexing the LDAP user with Kerberos ========\n\n"
 ## index ldap user
 docker exec -ti kerberos kadmin.local -q "addprinc -pw password -x dn=uid=alice,ou=People,dc=example,dc=com alice"
 docker exec -ti kerberos kadmin.local -q "addprinc -pw password  -x dn=uid=bob,ou=People,dc=example,dc=com bob"
+docker exec -ti kerberos kadmin.local -q "addprinc -pw password  -x dn=uid=dhrn,ou=People,dc=example,dc=com dhrn"
 
 printf "\n======== create kerberos principles for server ========\n\n"
 # Add principles for Alfresco and generate keytab

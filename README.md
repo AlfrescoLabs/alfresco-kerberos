@@ -1,4 +1,15 @@
-# Alfresco Kerberos Test
+# Alfresco Kerberos
+   This project provides the simple alfresco with kerberos enabled env for testing purposes.
+
+### How to run 
+```shell
+    ./start.sh
+    # assuming the docker compose created env correctly
+    # update the your machine dns to example.com
+    kinit #authendicate with user (update krb5.conf with above domain name)
+    klist # display the available session
+    google-chrome  --auth-server-whitelist="http://example.com" --auth-negotiate-delegate-whitelist="http://example.com" http://example.com/workspace
+```
 
 ### LDAP Details
 
@@ -18,13 +29,13 @@
 docker-compose up
 
 # Verify valid keytab file generated
-docker exec keycloak-openldap kinit HTTP/keycloak.127.0.0.1.nip.io@EXAMPLE.ORG -k -t /etc/keytabs/keycloak.keytab
+docker exec kerberos kinit HTTP/example.com@EXAMPLE.ORG -k -t /etc/keytabs/alfresco.keytab
 # List and destroy Kerberos ticket
-docker exec keycloak-openldap klist
-docker exec keycloak-openldap kdestroy
+docker exec kerberos klist
+docker exec kerberos kdestroy
 
 # Verify permissions of shared keytab file to ensure it can be read by Keycloak
-docker exec --user root keycloak chmod 644 /tmp/keytabs/keycloak.keytab
+docker exec --user root alfresco chmod 644 /etc/keytabs/alfresco.keytab
 ```
 
 ### Kerberos Login Test
@@ -54,7 +65,7 @@ Creating users is now a two-step process:
 
 ## Kerberos Setup Verification / Debugging
 
-> Run the following commands in `openldap` container: `docker exec -it openldap bash`
+> Run the following commands in `kerberos` container: `docker exec -it kerberos bash`
 > Default password for `ldapsearch` command is provided using `-w` flag. Use `-W` for interactive password prompt.
 
 ```sh
