@@ -236,7 +236,7 @@ services:
         alfresco-network:
 
   proxy:
-      image: alfresco/alfresco-acs-nginx:3.0.1
+      image: alfresco/alfresco-acs-nginx:3.2.0
       container_name: proxy
       volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
