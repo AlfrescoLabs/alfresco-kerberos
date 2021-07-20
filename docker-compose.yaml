@@ -172,7 +172,7 @@ services:
         alfresco-network:
 
   shared-file-store:
-      image: alfresco/alfresco-shared-file-store:0.13.0
+      image: alfresco/alfresco-shared-file-store:0.14.1
       environment:
         JAVA_OPTS: " -Xms256m -Xmx512m"
         scheduler.content.age.millis: 86400000
