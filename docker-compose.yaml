@@ -159,7 +159,7 @@ services:
         alfresco-network:
 
   transform-core-aio:
-      image: alfresco/alfresco-transform-core-aio:2.3.10
+      image: alfresco/alfresco-transform-core-aio:2.5.2
       environment:
         JAVA_OPTS: " -Xms256m -Xmx1536m"
         ACTIVEMQ_URL: "nio://activemq:61616"
