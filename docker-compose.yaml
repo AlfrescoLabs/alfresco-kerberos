@@ -185,7 +185,7 @@ services:
         alfresco-network:
 
   postgres:
-      image: postgres:11.7
+      image: postgres:13.3
       environment:
         - POSTGRES_PASSWORD=alfresco
         - POSTGRES_USER=alfresco
