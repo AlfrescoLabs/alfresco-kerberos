@@ -1,4 +1,6 @@
-# Alfresco Kerberos Test
+# Alfresco Kerberos
+   This project provides the simple alfresco with kerberos enabled env for testing purposes.
+
 ### How to run 
 ```shell
     ./start.sh
@@ -63,7 +65,7 @@ Creating users is now a two-step process:
 
 ## Kerberos Setup Verification / Debugging
 
-> Run the following commands in `openldap` container: `docker exec -it openldap bash`
+> Run the following commands in `kerberos` container: `docker exec -it kerberos bash`
 > Default password for `ldapsearch` command is provided using `-w` flag. Use `-W` for interactive password prompt.
 
 ```sh
