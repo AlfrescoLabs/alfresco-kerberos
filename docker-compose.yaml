@@ -197,7 +197,7 @@ services:
         alfresco-network:
 
   solr6:
-      image: alfresco/alfresco-search-services:2.0.1
+      image: alfresco/alfresco-search-services:2.0.2
       environment:
         #Solr needs to know how to register itself with Alfresco
         - SOLR_ALFRESCO_HOST=alfresco
