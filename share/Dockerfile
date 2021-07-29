@@ -1,4 +1,4 @@
-FROM alfresco/alfresco-share:6.2.2.4
+FROM alfresco/alfresco-share:7.0.1.1
 # Files to be included in container
 
 USER root
