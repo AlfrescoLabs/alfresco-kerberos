@@ -253,6 +253,40 @@ services:
       networks:
         alfresco-network:
 
+# process services
+  process:
+    container_name: process
+    hostname: process
+    build:
+      context: ./process-services
+    extra_hosts:
+      - "example.com:192.168.55.10"
+    ports:
+      - 8080:8080
+    links:
+      - postgres-process:postgres-process
+      - elasticsearch:elasticsearch
+    depends_on:
+      - postgres-process
+      - elasticsearch
+
+  elasticsearch:
+    image: elasticsearch:7.6.0
+    environment:
+      discovery.type: single-node
+    ports:
+      - 9300:9300
+      - 9200:9200
+
+  postgres-process:
+    image: postgres:10.9
+    environment:
+      POSTGRES_DB: activiti
+      POSTGRES_USER: alfresco
+      POSTGRES_PASSWORD: alfresco
+    ports:
+      - 5433:5432
+
 networks:
   alfresco-network:
     driver: bridge

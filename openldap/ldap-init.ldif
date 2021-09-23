@@ -95,6 +95,28 @@ uid: httpalfresco
 userPassword: password
 mail: httpalfresco@example.com
 
+dn: uid=httpprocess,ou=People,{{ LDAP_BASE_DN }}
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: httpprocess
+sn: Http Alfresco
+uid: httpprocess
+userPassword: password
+mail: httprocess@example.com
+
+dn: uid=admin@app.activiti.com,ou=People,{{ LDAP_BASE_DN }}
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Admin
+sn: User
+uid: admin@app.activiti.com
+userPassword: password
+mail: admin@app.activiti.com
+
 dn: ou=groups,{{ LDAP_BASE_DN }}
 objectClass: organizationalUnit
 objectClass: top
@@ -110,3 +132,8 @@ cn: all-users
 objectClass: groupOfNames
 member: uid=alice,ou=People,{{ LDAP_BASE_DN }}
 member: uid=bob,ou=People,{{ LDAP_BASE_DN }}
+
+dn: cn=admin,ou=groups,{{ LDAP_BASE_DN }}
+objectClass: groupOfNames
+cn: admin
+member: uid=admin@activiti.com,ou=People,{{ LDAP_BASE_DN }}

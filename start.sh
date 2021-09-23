@@ -23,6 +23,9 @@ printf "\n======== create kerberos principles for server ========\n\n"
 # Add principles for Alfresco and generate keytab
 docker exec -ti kerberos kadmin.local -q "addprinc -pw password -x dn=uid=httpalfresco,ou=People,dc=example,dc=com HTTP/example.com@EXAMPLE.COM"
 docker exec -ti kerberos kadmin.local -q "ktadd -k alfresco.keytab HTTP/example.com@EXAMPLE.COM"
+# Add principles for Process and generate keytab
+docker exec -ti kerberos kadmin.local -q "addprinc -pw password -x dn=uid=httpprocess,ou=People,dc=example,dc=com HTTP/example.com@EXAMPLE.COM"
+docker exec -ti kerberos kadmin.local -q "ktadd -k process HTTP/example.com@EXAMPLE.COM"
 
 printf "\n======== Available principles in the kerberos ========\n\n"
 docker exec -ti kerberos kadmin.local -q "list_principals"
@@ -31,14 +34,20 @@ printf "\n======== configure the Alfresco with Kerberos ========\n\n"
 KERBEROS=$(docker-compose ps -q kerberos);
 ALFRESCO=$(docker-compose ps -q alfresco);
 SHARE=$(docker-compose ps -q share);
+PROCESS=$(docker-compose ps -q process);
 
 docker cp ${KERBEROS}:/alfresco.keytab ./keytabs/
+docker cp ${PROCESS}:/process.keytab ./keytabs/
 chmod 777 ./keytabs/alfresco.keytab
+chmod 777 ./keytabs/process.keytab
+
 docker cp ./keytabs/alfresco.keytab ${ALFRESCO}:/etc/alfresco.keytab
 docker cp ./keytabs/alfresco.keytab ${SHARE}:/etc/share.keytab
+docker cp ./keytabs/process.keytab ${PROCES}:/etc/process.keytab
 
 docker-compose restart alfresco
 docker-compose restart share
+docker-compose restart process
 
 printf "\n======== kerberos configuration is over. Here is the tail ========\n\n"
 #docker logs -f alfresco &
