@@ -257,37 +257,39 @@ services:
 
 # process services
   process:
-    container_name: process
-    hostname: process
-    build:
-      context: ./process-services
-    extra_hosts:
-      - "example.com:192.168.55.10"
-    links:
-      - postgres-process:postgres-process
-      - elasticsearch:elasticsearch
-    depends_on:
-      - postgres-process
-      - elasticsearch
-    networks:
-      alfresco-network:
+      container_name: process
+      hostname: process
+      build:
+        context: ./process-services
+      extra_hosts:
+        - "example.com:192.168.55.10"
+      links:
+        - postgres-process:postgres-process
+        - elasticsearch:elasticsearch
+      depends_on:
+        - postgres-process
+        - elasticsearch
+      networks:
+        alfresco-network:
 
   elasticsearch:
-    image: elasticsearch:7.6.0
-    environment:
-      discovery.type: single-node
-    ports:
-      - 9300:9300
-      - 9200:9200
+      image: elasticsearch:7.6.0
+      environment:
+        discovery.type: single-node
+      ports:
+        - 9300:9300
+        - 9200:9200
+      networks:
+        alfresco-network:
 
   postgres-process:
-    image: postgres:10.9
-    environment:
-      POSTGRES_DB: activiti
-      POSTGRES_USER: alfresco
-      POSTGRES_PASSWORD: alfresco
-    networks:
-      alfresco-network:
+      image: postgres:10.9
+      environment:
+        POSTGRES_DB: activiti
+        POSTGRES_USER: alfresco
+        POSTGRES_PASSWORD: alfresco
+      networks:
+        alfresco-network:
 
 networks:
   alfresco-network:
