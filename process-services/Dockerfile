@@ -9,7 +9,7 @@ USER root
 #COPY extensions/aps-extensions-jar-${project.version}.jar $TOMCAT_DIR/webapps/activiti-app/WEB-INF/lib
 #COPY extensions/activiti-app.war $TOMCAT_DIR/webapps
 
-#COPY logging/logback.xml $TOMCAT_DIR/lib
+COPY logback.xml $TOMCAT_DIR/lib
 
 COPY properties/activiti-app.properties $TOMCAT_DIR/lib
 COPY properties/activiti-ldap.properties $TOMCAT_DIR/lib
