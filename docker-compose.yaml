@@ -242,6 +242,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       depends_on:
         - alfresco
+        - process
         - demoshell
         - share
       ports:
