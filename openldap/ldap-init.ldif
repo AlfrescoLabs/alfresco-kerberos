@@ -106,7 +106,7 @@ uid: httpprocess
 userPassword: password
 mail: httprocess@example.com
 
-dn: uid=admin@app.activiti.com,ou=People,{{ LDAP_BASE_DN }}
+dn: uid=admin,ou=People,{{ LDAP_BASE_DN }}
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
@@ -136,4 +136,4 @@ member: uid=bob,ou=People,{{ LDAP_BASE_DN }}
 dn: cn=admin,ou=groups,{{ LDAP_BASE_DN }}
 objectClass: groupOfNames
 cn: admin
-member: uid=admin@app.activiti.com,ou=People,{{ LDAP_BASE_DN }}
+member: uid=admin,ou=People,{{ LDAP_BASE_DN }}
