@@ -111,7 +111,7 @@ objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
-cn: Admin
+cn: admin
 sn: User
 uid: admin
 userPassword: password
