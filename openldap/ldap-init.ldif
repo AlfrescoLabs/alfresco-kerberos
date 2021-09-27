@@ -113,7 +113,7 @@ objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Admin
 sn: User
-uid: admin@app.activiti.com
+uid: admin
 userPassword: password
 mail: admin@app.activiti.com
 
