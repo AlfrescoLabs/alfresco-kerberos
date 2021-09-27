@@ -282,8 +282,6 @@ services:
       POSTGRES_DB: activiti
       POSTGRES_USER: alfresco
       POSTGRES_PASSWORD: alfresco
-    ports:
-      - 5433:5432
 
 networks:
   alfresco-network:
