@@ -261,8 +261,6 @@ services:
       context: ./process-services
     extra_hosts:
       - "example.com:192.168.55.10"
-    ports:
-      - 8080:8080
     links:
       - postgres-process:postgres-process
       - elasticsearch:elasticsearch
