@@ -248,6 +248,7 @@ services:
         - 80:80
       links:
         - demoshell
+        - process
         - alfresco
         - share
       networks:
