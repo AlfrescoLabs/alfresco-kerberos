@@ -269,6 +269,8 @@ services:
     depends_on:
       - postgres-process
       - elasticsearch
+    networks:
+      alfresco-network:
 
   elasticsearch:
     image: elasticsearch:7.6.0
