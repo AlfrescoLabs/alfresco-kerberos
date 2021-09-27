@@ -286,6 +286,8 @@ services:
       POSTGRES_DB: activiti
       POSTGRES_USER: alfresco
       POSTGRES_PASSWORD: alfresco
+    networks:
+      alfresco-network:
 
 networks:
   alfresco-network:
