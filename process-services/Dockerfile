@@ -14,7 +14,7 @@ COPY logback.xml $TOMCAT_DIR/lib
 COPY properties/activiti-app.properties $TOMCAT_DIR/lib
 COPY properties/activiti-ldap.properties $TOMCAT_DIR/lib
 
-COPY activiti-license/*.* $TOMCAT_DIR/lib/
+COPY license/*.* $TOMCAT_DIR/lib/
 
 
 RUN yum install -y krb5-workstation

@@ -3,7 +3,7 @@
    ![kerberos env](https://docs.alfresco.com/identity-service/images/kerberos.png)
    
 
-### Steps to work with the project
+### Steps to start with
 
 ```shell
     ./start.sh # start the docker compose created env
@@ -12,7 +12,9 @@
     klist # display the available session
     google-chrome  --auth-server-whitelist="http://example.com" --auth-negotiate-delegate-whitelist="http://example.com" http://example.com/workspace
 ```
-### Available  users
+
+### Users
+Below table provide info about scaffold users
 
 | Username  | Password |
 | ------------- | ------------- |
@@ -21,11 +23,16 @@
 | dhrn  | password  |
 | administrator  | password  |
 
+### License
+
+* ACS - comes with 2 days free license 
+* APS - keep the licence inside `process-services/license` folder
 
 ## More Info about environment
 
 
 ### LDAP
+
 ```text
 BaseDn: cn=admin,dc=example,dc=com
 Password: admin
