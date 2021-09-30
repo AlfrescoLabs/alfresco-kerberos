@@ -1,28 +1,37 @@
 # Alfresco Kerberos
-   This project provides the simple alfresco with kerberos enabled env for testing purposes.
+   This project provides the simple [alfresco with kerberos](https://docs.alfresco.com/identity-service/latest/tutorial/sso/kerberos/) enabled env for testing purposes.
    ![kerberos env](https://docs.alfresco.com/identity-service/images/kerberos.png)
    
 
-### How to run 
+### Steps to work with the project
+
 ```shell
-    ./start.sh
-    # assuming the docker compose created env correctly
-    # update the your machine dns to example.com
+    ./start.sh # start the docker compose created env
+    # update the machine ip in the dns or host file to example.com
     kinit #authendicate with user (update krb5.conf with above domain name)
     klist # display the available session
     google-chrome  --auth-server-whitelist="http://example.com" --auth-negotiate-delegate-whitelist="http://example.com" http://example.com/workspace
 ```
+### Available  users
 
-### LDAP Details
+| Username  | Password |
+| ------------- | ------------- |
+| alice  | password  |
+| bob  | password  |
+| dhrn  | password  |
+| administrator  | password  |
 
-* BaseDn: `cn=admin,dc=example,dc=com`
 
-* Password: `admin`
+## More Info about environment
 
 
-## QuickStart
+### LDAP
+```text
+BaseDn: cn=admin,dc=example,dc=com
+Password: admin
+```
 
-### Kerberos Setup
+### Kerberos
 
 > Review permissions of volume mounts to ensure file permissions are at least 644.
 
@@ -38,18 +47,6 @@ docker exec kerberos kdestroy
 
 # Verify permissions of shared keytab file to ensure it can be read by Keycloak
 docker exec --user root alfresco chmod 644 /etc/keytabs/alfresco.keytab
-```
-
-### Kerberos Login Test
-
-> Credentials: `alice@EXAMPLE.ORG` / `password`, `bob@EXAMPLE.ORG` / `password`
-
-
-### Cleanup
-
-```sh
-# Cleanup
-docker-compose rm -f
 ```
 
 ## Creating new Users
@@ -90,4 +87,11 @@ service krb5-admin-server status
 kinit HTTP/alfresco@EXAMPLE.ORG -k -t /etc/keytabs/alfresco.keytab
 klist
 kdestroy
+```
+
+### Cleanup
+
+```sh
+# Cleanup
+docker-compose down -v
 ```
