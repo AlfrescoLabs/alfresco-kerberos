@@ -537,7 +537,7 @@
             HTTP/<server_name> principal in the current realm, so if we're to decode
             that ST, it has to match.)
          -->
-         <password>admin</password>
+         <password>password</password>
          <!--
             Kerberos realm and KDC address.
          -->

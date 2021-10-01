@@ -4,16 +4,6 @@ objectclass: top
 objectclass: organizationalUnit
 ou: People
 
-dn: ou=RealmRoles,{{ LDAP_BASE_DN }}
-objectclass: top
-objectclass: organizationalUnit
-ou: RealmRoles
-
-dn: ou=FinanceRoles,{{ LDAP_BASE_DN }}
-objectclass: top
-objectclass: organizationalUnit
-ou: FinanceRoles
-
 # Add users
 dn: uid=alice,ou=People,{{ LDAP_BASE_DN }}
 objectclass: top
@@ -26,7 +16,7 @@ sn: Amber
 mail: alice@example.com
 postalCode: 88441
 telephoneNumber: 1234567890
-givenName: alice
+givenName: Alice
 o: Company Software Inc.
 userPassword: password
 
@@ -40,7 +30,7 @@ cn: Bob
 sn: Brown
 mail: bob@example.com
 telephoneNumber: 1234567890
-givenName: bob
+givenName: Bob
 o: Company Software Inc.
 postalCode: 88441
 street: Elm 5
@@ -57,43 +47,35 @@ cn: Dharan
 sn: G
 mail: dhrn@example.com
 telephoneNumber: 1234567890
-givenName: dhrn
+givenName: Dhrn
 o: Company Software Inc.
 postalCode: 88441
 street: Elm 5
 userPassword: password
 
-dn: cn=ldap-user,ou=RealmRoles,{{ LDAP_BASE_DN }}
-objectclass: top
-objectclass: groupOfNames
-cn: ldap-user
-description: people with ldap user access
-member: uid=alice,ou=People,{{ LDAP_BASE_DN }}
-member: uid=bob,ou=People,{{ LDAP_BASE_DN }}
-
-dn: cn=ldap-admin,ou=RealmRoles,{{ LDAP_BASE_DN }}
-objectclass: top
-objectclass: groupOfNames
-cn: ldap-admin
-description: people with ldap admin access
-member: uid=alice,ou=People,{{ LDAP_BASE_DN }}
-
-dn: cn=accountant,ou=FinanceRoles,{{ LDAP_BASE_DN }}
-objectclass: top
-objectclass: groupOfNames
-cn: accountant
-member: uid=bob,ou=People,{{ LDAP_BASE_DN }}
-
-dn: uid=httpalfresco,ou=People,{{ LDAP_BASE_DN }}
+dn: uid=administrator,ou=People,{{ LDAP_BASE_DN }}
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
-cn: httpalfresco
-sn: Http Alfresco
-uid: httpalfresco
+cn: administrator
+sn: User
+uid: administrator
 userPassword: password
-mail: httpalfresco@example.com
+givenName: Administrator
+mail: administrator@example.com
+
+dn: uid=httpexample,ou=People,{{ LDAP_BASE_DN }}
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: httpexample
+sn: Host
+uid: httpexample
+userPassword: password
+givenName: Example
+mail: httpexample@example.com
 
 dn: ou=groups,{{ LDAP_BASE_DN }}
 objectClass: organizationalUnit
@@ -103,10 +85,16 @@ ou: groups
 dn: cn=sso,ou=groups,{{ LDAP_BASE_DN }}
 objectClass: groupOfNames
 cn: sso
-member: uid=httpalfresco,ou=People,{{ LDAP_BASE_DN }}
+member: uid=httpexample,ou=People,{{ LDAP_BASE_DN }}
 
 dn: cn=all-users,ou=groups,{{ LDAP_BASE_DN }}
 cn: all-users
 objectClass: groupOfNames
 member: uid=alice,ou=People,{{ LDAP_BASE_DN }}
 member: uid=bob,ou=People,{{ LDAP_BASE_DN }}
+member: uid=dhrn,ou=People,{{ LDAP_BASE_DN }}
+
+dn: cn=admins,ou=groups,{{ LDAP_BASE_DN }}
+objectClass: groupOfNames
+cn: admin
+member: uid=administrator,ou=People,{{ LDAP_BASE_DN }}

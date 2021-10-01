@@ -1,28 +1,44 @@
 # Alfresco Kerberos
-   This project provides the simple alfresco with kerberos enabled env for testing purposes.
+   This project provides the simple [alfresco with kerberos](https://docs.alfresco.com/identity-service/latest/tutorial/sso/kerberos/) enabled env for testing purposes.
    ![kerberos env](https://docs.alfresco.com/identity-service/images/kerberos.png)
    
 
-### How to run 
+### Steps to start with
+
 ```shell
-    ./start.sh
-    # assuming the docker compose created env correctly
-    # update the your machine dns to example.com
+    ./start.sh # start the docker compose created env
+    # update the machine ip in the dns or host file to example.com
     kinit #authendicate with user (update krb5.conf with above domain name)
     klist # display the available session
     google-chrome  --auth-server-whitelist="http://example.com" --auth-negotiate-delegate-whitelist="http://example.com" http://example.com/workspace
 ```
 
-### LDAP Details
+### Users
+Below table provide info about scaffold users
 
-* BaseDn: `cn=admin,dc=example,dc=com`
+| Username  | Password |
+| ------------- | ------------- |
+| alice  | password  |
+| bob  | password  |
+| dhrn  | password  |
+| administrator  | password  |
 
-* Password: `admin`
+### License
+
+* ACS - comes with 2 days free license 
+* APS - keep the licence inside `process-services/license` folder
+
+## More Info about environment
 
 
-## QuickStart
+### LDAP
 
-### Kerberos Setup
+```text
+BaseDn: cn=admin,dc=example,dc=com
+Password: admin
+```
+
+### Kerberos
 
 > Review permissions of volume mounts to ensure file permissions are at least 644.
 
@@ -38,18 +54,6 @@ docker exec kerberos kdestroy
 
 # Verify permissions of shared keytab file to ensure it can be read by Keycloak
 docker exec --user root alfresco chmod 644 /etc/keytabs/alfresco.keytab
-```
-
-### Kerberos Login Test
-
-> Credentials: `alice@EXAMPLE.ORG` / `password`, `bob@EXAMPLE.ORG` / `password`
-
-
-### Cleanup
-
-```sh
-# Cleanup
-docker-compose rm -f
 ```
 
 ## Creating new Users
@@ -90,4 +94,11 @@ service krb5-admin-server status
 kinit HTTP/alfresco@EXAMPLE.ORG -k -t /etc/keytabs/alfresco.keytab
 klist
 kdestroy
+```
+
+### Cleanup
+
+```sh
+# Cleanup
+docker-compose down -v
 ```

@@ -37,7 +37,7 @@ services:
         ipv4_address: 192.168.55.10
 
   alfresco:
-      # image: alfresco/alfresco-content-repository:6.2.2
+#      image: alfresco/alfresco-content-repository:6.2.2
       container_name: alfresco
       hostname: alfresco
       build:
@@ -116,11 +116,11 @@ services:
         alfresco-network:
 
   share:
-    # image: alfresco/alfresco-share:6.2.2
+    image: alfresco/alfresco-share:6.2.2
     container_name: share
     hostname: share
-    build:
-      context: ./share
+#    build:
+#      context: ./share
     extra_hosts:
       - "example.com:192.168.55.10"
     environment:
@@ -230,8 +230,10 @@ services:
       container_name: workspace
       hostname: workspace
       environment:
-        BASE_PATH: ./
-        APP_CONFIG_AUTH_TYPE: ECM
+        - BASE_PATH=./
+        - APP_CONFIG_AUTH_TYPE=BASIC
+        - APP_CONFIG_PROVIDERS=ALL
+        - APP_CONFIG_KERBEROS_ENABLED=true
       networks:
         alfresco-network:
 
@@ -242,14 +244,52 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       depends_on:
         - alfresco
+        - process
         - demoshell
         - share
       ports:
         - 80:80
       links:
         - demoshell
+        - process
         - alfresco
         - share
+      networks:
+        alfresco-network:
+
+# process services
+  process:
+      container_name: process
+      hostname: process
+      build:
+        context: ./process-services
+      extra_hosts:
+        - "example.com:192.168.55.10"
+      links:
+        - postgres-process:postgres-process
+        - elasticsearch:elasticsearch
+      depends_on:
+        - postgres-process
+        - elasticsearch
+      networks:
+        alfresco-network:
+
+  elasticsearch:
+      image: elasticsearch:7.6.0
+      environment:
+        discovery.type: single-node
+      ports:
+        - 9300:9300
+        - 9200:9200
+      networks:
+        alfresco-network:
+
+  postgres-process:
+      image: postgres:10.9
+      environment:
+        POSTGRES_DB: activiti
+        POSTGRES_USER: alfresco
+        POSTGRES_PASSWORD: alfresco
       networks:
         alfresco-network:
 
