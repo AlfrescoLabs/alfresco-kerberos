@@ -27,7 +27,7 @@ printf "\n======== create kerberos principles for server ========\n\n"
 docker exec -ti kerberos kadmin.local -q "addprinc -pw password -x dn=uid=httpexample,ou=People,dc=example,dc=com HTTP/example.com@EXAMPLE.COM"
 docker exec -ti kerberos kadmin.local -q "ktadd -k example.keytab HTTP/example.com@EXAMPLE.COM"
 
-printf "\n======== Available principles in the kerberos ========\n\n"
+printf "\n======== available principles in the kerberos ========\n\n"
 docker exec -ti kerberos kadmin.local -q "list_principals"
 
 printf "\n======== configure the Alfresco with Kerberos ========\n\n"
@@ -48,8 +48,9 @@ docker-compose restart alfresco
 docker-compose restart process
 
 printf "\n======== kerberos configuration is over ======== \n\n"
-printf "Commands \n"
+printf "usefull commands :\n"
 printf " docker logs -f process \n"
 printf " docker logs -f alfresco \n"
 printf " docker exec -it process sh \n"
 printf " docker exec -it alfresco sh \n"
+printf "\n======== completed ========\n\n"

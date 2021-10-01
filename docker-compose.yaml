@@ -230,8 +230,10 @@ services:
       container_name: workspace
       hostname: workspace
       environment:
-        BASE_PATH: ./
-        APP_CONFIG_AUTH_TYPE: ECM
+        - BASE_PATH=./
+        - APP_CONFIG_AUTH_TYPE=BASIC
+        - APP_CONFIG_PROVIDERS=ALL
+        - APP_CONFIG_KERBEROS_ENABLED=true
       networks:
         alfresco-network:
 
