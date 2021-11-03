@@ -102,3 +102,31 @@ kdestroy
 # Cleanup
 docker-compose down -v
 ```
+
+### configure kerberos client
+
+- install the kerberos client (`sudo apt-get install krb5-user`)
+- update the configuration to reach the alfresco server
+
+Add/update the file `/etc/krb5.conf`
+
+```shell script
+[libdefaults]
+    default_realm = EXAMPLE.COM
+    ignore_acceptor_hostname = true
+
+[realms]
+    EXAMPLE.COM = {
+          kdc = example.com:88
+          admin_server = example.com:749
+    }
+
+[domain_realm]
+    .example.com = EXAMPLE.COM
+    example.com = EXAMPLE.COM
+
+```
+### commands to login
+
+ - `kinit <optional username>` # login with system user or give user
+ - `klist` # list the available session
