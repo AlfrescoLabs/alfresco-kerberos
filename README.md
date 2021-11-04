@@ -103,8 +103,9 @@ kdestroy
 docker-compose down -v
 ```
 
-### configure kerberos client
+## configure kerberos client
 
+- update the OS [hosts file](https://www.makeuseof.com/tag/modify-manage-hosts-file-linux/#:~:text=The%20hosts%20file%20is%20a,connect%20to%20the%20appropriate%20server.) `<docker machine ip> example.com`
 - install the kerberos client (`sudo apt-get install krb5-user`)
 - update the configuration to reach the alfresco server
 
@@ -126,7 +127,7 @@ Add/update the file `/etc/krb5.conf`
     example.com = EXAMPLE.COM
 
 ```
-### commands to login
+## commands to login
 
  - `kinit <optional username>` # login with system user or give user
  - `klist` # list the available session
