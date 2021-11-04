@@ -96,7 +96,7 @@ klist
 kdestroy
 ```
 
-### Cleanup
+## Cleanup
 
 ```sh
 # Cleanup
@@ -131,3 +131,89 @@ Add/update the file `/etc/krb5.conf`
 
  - `kinit <optional username>` # login with system user or give user
  - `klist` # list the available session
+
+## Example logs
+```Creating network "alfresco-kerberos_alfresco-network" with driver "bridge"
+Creating volume "alfresco-kerberos_vol-openldap-ldap" with default driver
+Creating volume "alfresco-kerberos_vol-openldap-slapd" with default driver
+Creating volume "alfresco-kerberos_shared-file-store-volume" with default driver
+Creating alfresco-kerberos_elasticsearch_1      ... done
+Creating workspace                              ... done
+Creating alfresco-kerberos_postgres_1           ... done
+Creating alfresco-kerberos_activemq_1          ... done
+Creating alfresco-kerberos_shared-file-store_1 ... done
+Creating alfresco-kerberos_postgres-process_1   ... done
+Creating alfresco-kerberos_solr6_1              ... done
+Creating openldap                              ... done
+Creating alfresco                               ... done
+Creating kerberos                               ... done
+Creating alfresco-kerberos_transform-router_1   ... done
+Creating alfresco-kerberos_transform-core-aio_1 ... done
+Creating process                                ... done
+Creating share                                  ... done
+Creating proxy                                  ... done
+
+======== wait for ldap and kerberos sync ========
+
+
+======== indexing the LDAP user with Kerberos ========
+
+Authenticating as principal root/admin@EXAMPLE.COM with password.
+WARNING: no policy specified for alice@EXAMPLE.COM; defaulting to no policy
+Principal "alice@EXAMPLE.COM" created.
+Authenticating as principal root/admin@EXAMPLE.COM with password.
+WARNING: no policy specified for bob@EXAMPLE.COM; defaulting to no policy
+Principal "bob@EXAMPLE.COM" created.
+Authenticating as principal root/admin@EXAMPLE.COM with password.
+WARNING: no policy specified for dhrn@EXAMPLE.COM; defaulting to no policy
+Principal "dhrn@EXAMPLE.COM" created.
+Authenticating as principal root/admin@EXAMPLE.COM with password.
+WARNING: no policy specified for administrator@EXAMPLE.COM; defaulting to no policy
+Principal "administrator@EXAMPLE.COM" created.
+
+======== create kerberos principles for server ========
+
+Authenticating as principal root/admin@EXAMPLE.COM with password.
+WARNING: no policy specified for HTTP/example.com@EXAMPLE.COM; defaulting to no policy
+Principal "HTTP/example.com@EXAMPLE.COM" created.
+Authenticating as principal root/admin@EXAMPLE.COM with password.
+Entry for principal HTTP/example.com@EXAMPLE.COM with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab WRFILE:example.keytab.
+Entry for principal HTTP/example.com@EXAMPLE.COM with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab WRFILE:example.keytab.
+
+======== available principles in the kerberos ========
+
+Authenticating as principal root/admin@EXAMPLE.COM with password.
+alice@EXAMPLE.COM
+bob@EXAMPLE.COM
+dhrn@EXAMPLE.COM
+administrator@EXAMPLE.COM
+HTTP/example.com@EXAMPLE.COM
+K/M@EXAMPLE.COM
+krbtgt/EXAMPLE.COM@EXAMPLE.COM
+kadmin/admin@EXAMPLE.COM
+kadmin/af3a75f6db2e@EXAMPLE.COM
+kiprop/af3a75f6db2e@EXAMPLE.COM
+kadmin/changepw@EXAMPLE.COM
+kadmin/history@EXAMPLE.COM
+
+======== configure the Alfresco with Kerberos ========
+
+Restarting alfresco ... done
+Restarting process ... done
+
+======== kerberos configuration is over ======== 
+
+usefull commands :
+ docker logs -f process 
+ docker logs -f alfresco 
+ docker exec -it process sh 
+ docker exec -it alfresco sh 
+
+======== completed ========
+```
+
+## DISCLIMER
+
+If you are facing any issues with kerberos, just try to rerun the `./start.sh`
+Sometime kerberos server fails to start becase of port issue, check it before retrying
+
