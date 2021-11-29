@@ -2,26 +2,22 @@
    This project provides the simple [alfresco with kerberos](https://docs.alfresco.com/identity-service/latest/tutorial/sso/kerberos/) enabled env for testing purposes.
    ![kerberos env](https://docs.alfresco.com/identity-service/images/kerberos.png)
    
+ ![auto-login](https://user-images.githubusercontent.com/14145706/143895176-4ab0b4b6-96a4-40c7-90f4-8a5f256fe27d.gif)
 
-### Steps to start with
 
+### Steps involved in the simple kerberos setup
+1. [Run the environment](#how-to-start)
+2. [Configure kerberos client against the environment](#configure-kerberos-client)
+3. [Configure browser to support the kerberos authentication](#configure-kerberos-with-browser)
+4. [Open the application url](#configure-kerberos-with-browser)
+
+### How to start
+To run the environment, use the start.sh shell script.
 ```shell
-    ./start.sh # start the docker compose created env
-    # update the machine ip in the dns or host file to example.com
-    kinit #authendicate with user (update krb5.conf with above domain name)
-    klist # display the available session
-    google-chrome  --auth-server-whitelist="http://example.com" --auth-negotiate-delegate-whitelist="http://example.com" http://example.com/workspace
+./start.sh # start the docker compose created env
 ```
+Try to execute the startsh shell script to run the environment. [click here for example logs](#example-logs)
 
-### Users
-Below table provide info about scaffold users
-
-| Username  | Password |
-| ------------- | ------------- |
-| alice  | password  |
-| bob  | password  |
-| dhrn  | password  |
-| administrator  | password  |
 
 ### License
 
@@ -30,9 +26,9 @@ Below table provide info about scaffold users
 
 ## configure kerberos client
 
-- update the OS [hosts file](https://www.makeuseof.com/tag/modify-manage-hosts-file-linux/#:~:text=The%20hosts%20file%20is%20a,connect%20to%20the%20appropriate%20server.) `<docker machine ip> example.com`
-- install the kerberos client (`sudo apt-get install krb5-user`)
-- update the configuration to reach the alfresco server
+- update the OS [hosts file](https://www.makeuseof.com/tag/modify-manage-hosts-file-linux/#:~:text=The%20hosts%20file%20is%20a,connect%20to%20the%20appropriate%20server.) `<docker machine ip> example.com` or dns for docker-compose to `example.com`
+- install the kerberos client `sudo apt-get install krb5-user`
+- update the configuration to reach the docker compose server ⬇️
 
 Add/update the file `/etc/krb5.conf`
 
@@ -56,6 +52,23 @@ Add/update the file `/etc/krb5.conf`
 
  - `kinit <optional username>` # login with system user or give user
  - `klist` # list the available session
+
+## configure kerberos with browser 
+Here is command for chrome with kerberos. [read here for other browser](https://www.adaxes.com/help/EnableKerberosNTLMAuthentication/)
+
+```
+google-chrome  --auth-server-whitelist="http://example.com" --auth-negotiate-delegate-whitelist="http://example.com" http://example.com/workspace
+```
+
+### Users
+Below table provide info about scaffold users
+
+| Username  | Password |
+| ------------- | ------------- |
+| alice  | password  |
+| bob  | password  |
+| dhrn  | password  |
+| administrator  | password  |
 
 ## Example logs
 ```Creating network "alfresco-kerberos_alfresco-network" with driver "bridge"
@@ -143,8 +156,7 @@ If you are facing any issues with kerberos, just try to rerun the `./start.sh`
 Sometime kerberos server fails to start becase of port issue, check it before retrying
 
 
-## More Info about environment
-
+## More info about environment
 
 ### LDAP
 
@@ -184,7 +196,7 @@ Creating users is now a two-step process:
    docker exec -ti kerberos kadmin.local -q "addprinc -pw password  -x dn=uid=alice,ou=People,dc=example,dc=com bob"
    ```
 
-## Kerberos Setup Verification / Debugging
+## Kerberos Setup Verification
 
 > Run the following commands in `kerberos` container: `docker exec -it kerberos bash`
 > Default password for `ldapsearch` command is provided using `-w` flag. Use `-W` for interactive password prompt.
